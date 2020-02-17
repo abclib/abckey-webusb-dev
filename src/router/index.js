@@ -1,28 +1,63 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(Router)
+
+const files = require.context('.', true, /\.js$/)
+const modules = []
+files.keys().forEach(key => {
+  if (key === './index.js') return
+  modules.push(files(key).default)
+})
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/',
+    redirect: '/GetPublicKey'
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
+    meta: {
+      title: 'GetPublicKey'
+    },
+    path: '/GetPublicKey',
+    component: () => import(/* webpackChunkName: "GetPublicKey" */ '@/views/GetPublicKey')
+  },
+  {
+    meta: {
+      title: 'GetAddress'
+    },
+    path: '/GetAddress',
+    component: () => import(/* webpackChunkName: "GetAddress" */ '@/views/GetAddress')
+  },
+  {
+    meta: {
+      title: 'Settings'
+    },
+    path: '/Settings',
+    component: () => import(/* webpackChunkName: "Settings" */ '@/views/Settings')
+  },
+  ...modules
+]
 
-const router = new VueRouter({
-  routes
-});
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) return savedPosition
+  return { y: 0 }
+}
 
-export default router;
+const router = new Router({
+  base: process.env.BASE_URL,
+  path: '/',
+  routes,
+  scrollBehavior,
+  linkActiveClass: 'active'
+})
+
+router.beforeEach((to, from, next) => {
+  next()
+})
+
+router.afterEach(() => {
+  window.scrollTo(0, 0)
+})
+
+export default router

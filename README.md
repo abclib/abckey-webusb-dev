@@ -1,5 +1,3 @@
-# abckey-webusb-test
-
 ## Project setup
 ```
 npm install
