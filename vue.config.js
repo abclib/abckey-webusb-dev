@@ -4,6 +4,7 @@ var vueBuild = require('./vue.build')
 const IS_DEV = process.env.NODE_ENV === 'production' ? false : true
 
 module.exports = {
+  publicPath: IS_DEV ? '/' : '/abckey-webusb-demo/',
   productionSourceMap: IS_DEV,
   integrity: true,
   css: {
