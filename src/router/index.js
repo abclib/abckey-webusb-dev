@@ -13,28 +13,7 @@ files.keys().forEach(key => {
 const routes = [
   {
     path: '/',
-    redirect: '/GetPublicKey'
-  },
-  {
-    meta: {
-      title: 'GetPublicKey'
-    },
-    path: '/GetPublicKey',
-    component: () => import(/* webpackChunkName: "GetPublicKey" */ '@/views/GetPublicKey')
-  },
-  {
-    meta: {
-      title: 'GetAddress'
-    },
-    path: '/GetAddress',
-    component: () => import(/* webpackChunkName: "GetAddress" */ '@/views/GetAddress')
-  },
-  {
-    meta: {
-      title: 'Settings'
-    },
-    path: '/Settings',
-    component: () => import(/* webpackChunkName: "Settings" */ '@/views/Settings')
+    redirect: '/Bitcoin/GetPublicKey'
   },
   ...modules
 ]

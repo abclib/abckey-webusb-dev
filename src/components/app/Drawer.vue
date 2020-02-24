@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer permanent app>
     <v-list-item>
-      <v-btn outlined block @click="add()">
+      <v-btn block @click="add()" :color="c_pro ? 'success' : 'error'">
         <v-icon left>mdi-plus</v-icon>
         <span>{{ c_pro ? c_pro : 'Check for devices' }}</span>
       </v-btn>
@@ -12,35 +12,105 @@
         <span>Initialize</span>
       </v-btn>
     </v-list-item>
+    <v-list-item>
+      <v-btn outlined block @click="getFeatures()">
+        <v-icon left>mdi-info</v-icon>
+        <span>Get Features</span>
+      </v-btn>
+    </v-list-item>
+    <v-list-item>
+      <v-btn outlined block @click="clean()">
+        <v-icon left>mdi-logout</v-icon>
+        <span>Clear Session</span>
+      </v-btn>
+    </v-list-item>
     <v-divider></v-divider>
-    <v-list nav>
-      <v-list-item to="/GetPublicKey">
-        <v-list-item-content>
-          <v-list-item-title>GetPublicKey</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item to="/GetAddress">
-        <v-list-item-content>
-          <v-list-item-title>GetAddress</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item to="/signTransaction">
-        <v-list-item-content>
-          <v-list-item-title>SignTransaction</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item to="/Settings">
-        <v-list-item-content>
-          <v-list-item-title>Settings</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+
+    <v-list dense nav>
+      <v-list-group v-for="nav in d_nav" :key="nav.title" v-model="nav.active" :prepend-icon="nav.icon" no-action>
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="nav.title"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+        <v-list-item v-for="snav in nav.snav" :key="snav.title" :to="snav.path">
+          <v-list-item-content>
+            <v-list-item-title v-text="snav.title"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    d_nav: [
+      {
+        icon: 'mdi-alpha-a-circle',
+        title: 'Bitcoin',
+        snav: [
+          {
+            title: 'Get Public Key',
+            path: '/Bitcoin/GetPublicKey'
+          },
+          {
+            title: 'Get Address',
+            path: '/Bitcoin/GetAddress'
+          }
+        ]
+      },
+      {
+        icon: 'mdi-alpha-b-circle',
+        title: 'Ethereum',
+        snav: [
+          {
+            title: 'Get Public Key',
+            path: '/Bitcoin/GetPublicKey'
+          },
+          {
+            title: 'Get Address',
+            path: '/Bitcoin/GetAddress'
+          }
+        ]
+      },
+      {
+        icon: 'mdi-settings',
+        title: 'Device Settings',
+        snav: [
+          {
+            title: 'Apply Settings',
+            path: '/Settings/ApplySettings'
+          },
+          {
+            title: 'Change Pin',
+            path: '/Settings/ChangePin'
+          },
+          {
+            title: 'Ping',
+            path: '/Settings/Ping'
+          },
+          {
+            title: 'WipeDevice',
+            path: '/Settings/WipeDevice'
+          },
+          {
+            title: 'ResetDevice',
+            path: '/Settings/ResetDevice'
+          },
+          {
+            title: 'BackupDevice',
+            path: '/Settings/BackupDevice'
+          },
+          {
+            title: 'RecoveryDevice',
+            path: '/Settings/RecoveryDevice'
+          }
+        ]
+      }
+    ]
+  }),
   computed: {
     c_pro: vm => vm.$store.__s('usb.product')
   },
@@ -50,6 +120,12 @@ export default {
     },
     async init() {
       await this.$usb.cmd('Initialize')
+    },
+    async clean() {
+      await this.$usb.cmd('ClearSession')
+    },
+    async getFeatures() {
+      await this.$usb.cmd('GetFeatures')
     }
   }
 }

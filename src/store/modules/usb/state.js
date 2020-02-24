@@ -9,5 +9,6 @@ export default {
   patchVersion: 0,
   bootloaderMode: false,
   firmwarePresent: false,
-  model: ''
+  model: '',
+  msg: null
 }

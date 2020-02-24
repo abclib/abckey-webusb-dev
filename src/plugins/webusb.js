@@ -6,21 +6,18 @@ const webusb = new Usb({
   debug: true
 })
 
-webusb.onConnect(e => {
+webusb.onAdd(e => {
   syncVuex(e)
 })
 
-webusb.onDisconnect(e => {
+webusb.onErr(e => {
   syncVuex()
-  Store.__s('dialog.buttonAck', false)
-  console.log('onDisconnect', e)
+  console.log('onErr', e)
 })
 
-webusb.onRead(e => {
-  if (e.type === 'ButtonRequest') Store.__s('dialog.buttonAck', true)
-  if (e.type === 'Success') Store.__s('dialog.buttonAck', false)
-  if (e.type === 'Failure') Store.__s('dialog.buttonAck', false)
-  console.log('onRead', e)
+webusb.onMsg(e => {
+  Store.__s('usb.msg', JSON.parse(JSON.stringify(e)))
+  console.log('onMsg', e)
 })
 
 function syncVuex(e) {

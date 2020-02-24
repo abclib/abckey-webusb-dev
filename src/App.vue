@@ -4,7 +4,11 @@
     <app-bar />
     <app-content />
     <app-footer />
-    <dialog-button-ack :show="$store.__s('dialog.buttonAck')" />
+    <dialog-button-ack />
+    <dialog-pin-ack />
+    <dialog-pass-ack />
+    <dialog-word-ack />
+    <dialog-failure />
   </v-app>
 </template>
 
