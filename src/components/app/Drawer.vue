@@ -14,13 +14,13 @@
     </v-list-item>
     <v-list-item>
       <v-btn outlined block @click="getFeatures()">
-        <v-icon left>mdi-info</v-icon>
+        <v-icon left>mdi-information-outline</v-icon>
         <span>Get Features</span>
       </v-btn>
     </v-list-item>
     <v-list-item>
       <v-btn outlined block @click="clean()">
-        <v-icon left>mdi-logout</v-icon>
+        <v-icon left>mdi-logout-variant</v-icon>
         <span>Clear Session</span>
       </v-btn>
     </v-list-item>
