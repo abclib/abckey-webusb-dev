@@ -3,7 +3,7 @@ const __DIR__ = 'bitcoin'
 const GetPublicKey = {
   path: 'GetPublicKey',
   meta: {
-    title: 'Get PublicKey'
+    title: 'Get Public Key'
   },
   component: () => import(`@/views/${__DIR__}/GetPublicKey`)
 }

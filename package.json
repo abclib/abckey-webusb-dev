@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@abckey/webusb": "0.0.12",
+    "@trust/keyto": "^1.0.1",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "roboto-fontface": "*",

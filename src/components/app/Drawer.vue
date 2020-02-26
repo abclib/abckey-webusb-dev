@@ -48,11 +48,11 @@ export default {
   data: () => ({
     d_nav: [
       {
-        icon: 'mdi-alpha-a-circle',
+        icon: 'mdi-alpha-a-circle-outline',
         title: 'Bitcoin',
         snav: [
           {
-            title: 'Get PublicKey',
+            title: 'Get Public Key',
             path: '/Bitcoin/GetPublicKey'
           },
           {
@@ -62,11 +62,11 @@ export default {
         ]
       },
       {
-        icon: 'mdi-alpha-b-circle',
+        icon: 'mdi-alpha-b-circle-outline',
         title: 'Ethereum',
         snav: [
           {
-            title: 'Get PublicKey',
+            title: 'Get Public Key',
             path: '/Bitcoin/GetPublicKey'
           },
           {
@@ -76,7 +76,7 @@ export default {
         ]
       },
       {
-        icon: 'mdi-settings',
+        icon: 'mdi-settings-outline',
         title: 'Device Settings',
         snav: [
           {
@@ -110,11 +110,11 @@ export default {
         ]
       },
       {
-        icon: 'mdi-alpha-b-circle',
+        icon: 'mdi-puzzle-outline',
         title: 'ABC1 Extension',
         snav: [
           {
-            title: 'User Set Publickey',
+            title: 'User Set Public Key',
             path: '/abc1/UserSetPublicKey'
           },
           {

@@ -3,16 +3,8 @@
     <v-row>
       <v-col cols="6">
         <v-row>
-          <v-col>
-            <p>Starts workflow for setting/changing/removing the PIN</p>
-          </v-col>
-        </v-row>
-        <v-row align="center">
           <v-col cols="4">
-            <v-btn @click="setPin()" color="primary" large block>Change Pin</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="offPin()" color="error" large block>Remove Pin</v-btn>
+            <v-btn @click="userGetMnemonics()" color="primary" large block>User Get Mnemonics</v-btn>
           </v-col>
         </v-row>
         <v-row>
@@ -41,18 +33,10 @@ export default {
     d_request: ''
   }),
   methods: {
-    async setPin() {
+    async userGetMnemonics() {
       const proto = {}
-      const result = await this.$usb.cmd('ChangePin', proto)
-      this.d_request = `abckey.cmd("ChangePin", ` + JSON.stringify(proto, null, 4) + ')'
-      this.d_response = JSON.stringify(result, null, 4)
-    },
-    async offPin() {
-      const proto = {
-        remove: true
-      }
-      const result = await this.$usb.cmd('ChangePin', proto)
-      this.d_request = `abckey.cmd("ChangePin", ` + JSON.stringify(proto, null, 4) + ')'
+      const result = await this.$usb.cmd('UserGetMnemonics', proto)
+      this.d_request = `abckey.cmd("UserGetMnemonics", ` + JSON.stringify(proto, null, 4) + ')'
       this.d_response = JSON.stringify(result, null, 4)
     }
   }
