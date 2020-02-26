@@ -11,20 +11,22 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="2">
-            <v-text-field v-model="d_purpose" type="number" label="purpose" hide-details />
+          <v-col cols="4">
+            <v-text-field v-model="d_path" label="path" hide-details />
           </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="d_coinType" type="number" label="coin_type" hide-details />
-          </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="d_account" type="number" label="account" hide-details />
-          </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="d_change" type="number" label="change" hide-details />
-          </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="d_addressIndex" type="number" label="address_index" hide-details />
+          <v-col cols="4">
+            <v-select
+              v-model="d_scriptType"
+              :items="[
+                { text: 'SPENDADDRESS', value: 0 },
+                { text: 'SPENDMULTISIG', value: 1 },
+                { text: 'EXTERNAL', value: 2 },
+                { text: 'SPENDWITNESS', value: 3 },
+                { text: 'SPENDP2SHWITNESS', value: 4 }
+              ]"
+              label="script_type"
+              hide-details
+            ></v-select>
           </v-col>
         </v-row>
         <v-row align="center"> </v-row>
@@ -56,20 +58,30 @@
 export default {
   name: 'GetAddress',
   data: () => ({
-    d_purpose: 49,
-    d_coinType: 0,
-    d_account: 0,
-    d_change: 0,
-    d_addressIndex: 0,
+    d_path: `m/49'/0'/0'/0/0`,
+    d_scriptType: 0,
     d_showDisplay: false,
     d_response: '',
     d_request: ''
   }),
+  computed: {
+    c_addressN() {
+      let address_n = []
+      let path = this.d_path.match(/\/[0-9]+('|H)?/g)
+      for (let item of path) {
+        let id = parseInt(item.match(/[0-9]+/g)[0])
+        if (item.match(/('|H)/g)) id = (id | 0x80000000) >>> 0
+        address_n.push(id)
+      }
+      return address_n
+    }
+  },
   methods: {
     async getAddr() {
+      if (!this.c_addressN) return (this.d_response = 'path error')
       const proto = {
-        address_n: [(this.d_purpose | 0x80000000) >>> 0, (this.d_coinType | 0x80000000) >>> 0, (this.d_account | 0x80000000) >>> 0, this.d_change, this.d_addressIndex],
-        script_type: this.d_purpose === 49 ? 4 : 0,
+        address_n: this.c_addressN,
+        script_type: this.d_scriptType,
         show_display: this.d_showDisplay
       }
       const result = await this.$usb.cmd('GetAddress', proto)
