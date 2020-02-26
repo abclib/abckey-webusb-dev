@@ -58,6 +58,7 @@ const RecoveryDevice = {
 
 export default {
   path: `/${__DIR__}`,
-  component: () => import(/* webpackChunkName: "Bitcoin" */ `@/views/${__DIR__}/index`),
+  redirect: `/${__DIR__}/ApplySettings`,
+  component: () => import(/* webpackChunkName: "settings" */ `@/views/${__DIR__}/index`),
   children: [ApplySettings, ChangePin, Ping, WipeDevice, ResetDevice, BackupDevice, RecoveryDevice]
 }

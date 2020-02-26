@@ -52,7 +52,7 @@ export default {
         title: 'Bitcoin',
         snav: [
           {
-            title: 'Get Public Key',
+            title: 'Get PublicKey',
             path: '/Bitcoin/GetPublicKey'
           },
           {
@@ -66,7 +66,7 @@ export default {
         title: 'Ethereum',
         snav: [
           {
-            title: 'Get Public Key',
+            title: 'Get PublicKey',
             path: '/Bitcoin/GetPublicKey'
           },
           {
@@ -106,6 +106,20 @@ export default {
           {
             title: 'Backup Device',
             path: '/Settings/BackupDevice'
+          }
+        ]
+      },
+      {
+        icon: 'mdi-alpha-b-circle',
+        title: 'ABC1 Extension',
+        snav: [
+          {
+            title: 'User Set Publickey',
+            path: '/abc1/UserSetPublicKey'
+          },
+          {
+            title: 'User Get Mnemonics',
+            path: '/abc1/UserGetMnemonics'
           }
         ]
       }

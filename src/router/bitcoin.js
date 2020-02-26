@@ -26,7 +26,7 @@ const SignTransaction = {
 
 export default {
   path: `/${__DIR__}`,
-  component: () => import(/* webpackChunkName: "Bitcoin" */ `@/views/${__DIR__}/index`),
   redirect: `/${__DIR__}/GetPublicKey`,
+  component: () => import(/* webpackChunkName: "Bitcoin" */ `@/views/${__DIR__}/index`),
   children: [GetPublicKey, GetAddress, SignTransaction]
 }
