@@ -80,6 +80,10 @@ export default {
         title: 'Device Settings',
         snav: [
           {
+            title: 'Ping',
+            path: '/Settings/Ping'
+          },
+          {
             title: 'Apply Settings',
             path: '/Settings/ApplySettings'
           },
@@ -88,24 +92,20 @@ export default {
             path: '/Settings/ChangePin'
           },
           {
-            title: 'Ping',
-            path: '/Settings/Ping'
-          },
-          {
-            title: 'WipeDevice',
+            title: 'Wipe Device',
             path: '/Settings/WipeDevice'
           },
           {
-            title: 'ResetDevice',
+            title: 'Recovery Device',
+            path: '/Settings/RecoveryDevice'
+          },
+          {
+            title: 'Reset Device',
             path: '/Settings/ResetDevice'
           },
           {
-            title: 'BackupDevice',
+            title: 'Backup Device',
             path: '/Settings/BackupDevice'
-          },
-          {
-            title: 'RecoveryDevice',
-            path: '/Settings/RecoveryDevice'
           }
         ]
       }

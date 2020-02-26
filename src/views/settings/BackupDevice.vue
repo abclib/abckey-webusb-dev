@@ -2,6 +2,11 @@
   <v-container>
     <v-row>
       <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Perform backup of the device seed if not backed up using ResetDevice</p>
+          </v-col>
+        </v-row>
         <v-row align="center">
           <v-col cols="4">
             <v-btn @click="backupDevice()" color="primary" large block>Backup Device</v-btn>

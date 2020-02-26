@@ -2,11 +2,18 @@
   <v-container>
     <v-row>
       <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Ask device to do initialization involving user interaction</p>
+          </v-col>
+        </v-row>
         <v-row align="center">
           <v-col cols="4">
             <v-btn @click="resetDevice()" color="primary" large block>Reset Device</v-btn>
           </v-col>
-          <v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
             <v-select
               v-model="d_strength"
               :items="[
@@ -18,7 +25,7 @@
               hide-details
             ></v-select>
           </v-col>
-          <v-col>
+          <v-col cols="4">
             <v-select
               v-model="d_backupType"
               :items="[

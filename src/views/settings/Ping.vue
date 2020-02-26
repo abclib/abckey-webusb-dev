@@ -2,6 +2,11 @@
   <v-container>
     <v-row>
       <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Test if the device is alive, device sends back the message in Success response</p>
+          </v-col>
+        </v-row>
         <v-row align="center">
           <v-col cols="4">
             <v-btn @click="buttonProtection()" color="primary" large block>Button Protection</v-btn>

@@ -2,6 +2,11 @@
   <v-container>
     <v-row>
       <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Change language and/or label of the device</p>
+          </v-col>
+        </v-row>
         <v-row align="center">
           <v-col cols="4">
             <v-btn @click="usePassphrase(true)" color="success" large block>Enable Passphrase</v-btn>

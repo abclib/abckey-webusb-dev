@@ -1,12 +1,22 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
-        <v-row align="center">
+      <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Start recovery workflow asking user for specific words of mnemonic</p>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="4">
             <v-btn @click="recoveryDevice()" color="primary" large block>Recovery Device</v-btn>
           </v-col>
-          <v-col>
+          <v-col cols="4">
+            <v-btn @click="checkSeed()" color="success" large block>Check Seed</v-btn>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
             <v-select
               v-model="d_wordCount"
               :items="[
@@ -17,9 +27,6 @@
               label="word_count"
               hide-details
             ></v-select>
-          </v-col>
-          <v-col>
-            <v-btn @click="checkSeed()" color="success" large block>Check Seed</v-btn>
           </v-col>
         </v-row>
         <v-row>

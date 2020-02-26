@@ -2,6 +2,11 @@
   <v-container>
     <v-row>
       <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Request device to wipe all sensitive data and settings</p>
+          </v-col>
+        </v-row>
         <v-row align="center">
           <v-col cols="4">
             <v-btn @click="wipeDevice()" color="primary" large block>Wipe Device</v-btn>

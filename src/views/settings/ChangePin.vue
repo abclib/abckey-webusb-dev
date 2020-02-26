@@ -2,6 +2,11 @@
   <v-container>
     <v-row>
       <v-col cols="6">
+        <v-row>
+          <v-col>
+            <p>Starts workflow for setting/changing/removing the PIN</p>
+          </v-col>
+        </v-row>
         <v-row align="center">
           <v-col cols="4">
             <v-btn @click="setPin()" color="primary" large block>Change Pin</v-btn>
