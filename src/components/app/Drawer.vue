@@ -58,6 +58,10 @@ export default {
           {
             title: 'Get Address',
             path: '/Bitcoin/GetAddress'
+          },
+          {
+            title: 'Sign Transaction',
+            path: '/Bitcoin/SignTransaction'
           }
         ]
       },
