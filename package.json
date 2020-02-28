@@ -8,10 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@abckey/webusb": "0.0.12",
+    "@abckey/webusb": "0.0.13",
     "@trust/keyto": "^1.0.1",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "elliptic": "^6.5.2",
+    "hasha": "^5.2.0",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
     "vue-i18n": "^8.15.3",

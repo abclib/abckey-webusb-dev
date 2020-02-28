@@ -4,7 +4,7 @@
       <v-col cols="6">
         <v-row>
           <v-col cols="4">
-            <v-btn @click="userSetPublickey()" color="primary" large block>User Set Public Key</v-btn>
+            <v-btn @click="userSetPublicKey()" color="primary" large block>User Set Public Key</v-btn>
           </v-col>
         </v-row>
         <v-row>
@@ -14,7 +14,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-textarea v-model="d_ecdsaPEM" label="ECDSA Private Key (PEM)" auto-grow></v-textarea>
+            <v-textarea v-model="d_ecPEM" label="ECDSA Private Key (PEM)" auto-grow></v-textarea>
           </v-col>
         </v-row>
         <v-row>
@@ -24,11 +24,7 @@
         </v-row>
       </v-col>
       <v-col cols="6">
-        <v-row>
-          <v-col>
-            <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
+        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -36,42 +32,58 @@
 
 <script>
 import Keyto from '@trust/keyto'
+import Hasha from 'hasha'
+import { ec } from 'elliptic'
+
+const ecdsa = new ec('secp256k1');
+
 export default {
   name: 'ChangePin',
   data: () => ({
     d_rsaPEM: '',
-    d_ecdsaPEM: '',
+    d_ecPEM: '',
     d_response: '',
     d_request: ''
   }),
   mounted() {
-    this.d_rsaPEM = `-----BEGIN RSA PUBLIC KEY-----
-MIIBCgKCAQEAynIDF51wJD4fSK0CNSaskYwi14vIiUVXMbbJ4zv7wpRbmhZDd/ZE
-2rFWYG7e6lH4t9uMZbeZnMbvjcpIJtARhAJ3cl4ymQiqAAiEIOq4b/VTRetxVqov
-VwI98Y7M72XFRWbgHTQpqoVlgbVdIfEeZ++BVeCtf4LJtiPJl8xMv6QI9g3JaEDT
-XKSzzFgNGL5mv13eK0iK+yj5A7gUTZoMgJTtsvqzL3LZrFcI9wSy9D/AvSWNTqkY
-0olO17/z+zGf/9UbUJbBPhDUa8QyIplDqX7jc4BFlFF+FHS2+c+pCs02ilmV3eO5
-YZAC5eFZZdpzuczuMJLyALZ8sz67n380qQIDAQAB
------END RSA PUBLIC KEY-----`
-    this.d_ecdsaPEM = `-----BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg1QrLBxWHTn/H6Vgv
-g6hdfNBMF1lN2Mri3Lvm3v8nJxmhRANCAATlbd4A2ooCUuet8wcdXRKXzp3nUZJI
-Em1Lks13Wkc2QhZvNQte6YLbrbr+d85GZGkIhPcLsE+KStdi4ug3NKtE
------END PRIVATE KEY-----`
+    this.d_rsaPEM = `-----BEGIN PUBLIC KEY-----
+MIIBITANBgkqhkiG9w0BAQEFAAOCAQ4AMIIBCQKCAQBatZZ+iuWgttWENbHZMfHF
+gvD8uzuhQ9bVQ4vwnDa+YdRuSP1ay1oXdG0tO0cEQh3lnhaezrQOnc/27gp3vlKw
+j7L0/68lWqXlKtZ128iIItZBYAbcWQGu7oi9zvbrBNXX+L/Lq4A2dS8fhurF82kn
+NFruoyttMSH8pGb8wQLrGHk9mLLA/HEJoD2gg6EzC92Bbw+WoCvy3mQjpkeo1QqO
+1egC+evR/8Is/qtGGTf2YqjEvl4iN4yD8Dv0rOVQMbBB76z7Re4KGe6lVBM1tTmh
+4xFIUfpmrtzHtXicxbMJ1gLqXLqcvRQQLFsU75gZWMvEV+TO/7C0qkfvvIrelbjV
+AgMBAAE=
+-----END PUBLIC KEY-----`
+    this.d_ecPEM = `-----BEGIN EC PRIVATE KEY-----
+MHQCAQEEILrLJDUVtiut0FHwKs3LGig3LgeOW/mkNrpkLO5PGIB5oAcGBSuBBAAK
+oUQDQgAEvsPs11I7wcaCN4BuDB0Tv5QCOSY0xscagJFKNrWrbSII87XCflJs1xYi
+thsrjXg4wP/lojqdkWBhSmQAzc4Vjw==
+-----END EC PRIVATE KEY-----`
   },
   methods: {
-    async userSetPublickey() {
-      const jwk = Keyto.from(this.d_rsaPEM, 'pem').toJwk('public')
-      if (!jwk) return
-      console.log(jwk)
-      // const proto = {
-      //   rsa_mod: 1,
-      //   rsa_exp: 2,
-      //   msg_sign: 3
-      // }
-      // const result = await this.$usb.cmd('UserSetPublickey', proto)
-      // this.d_request = `abckey.cmd("UserSetPublickey", ` + JSON.stringify(proto, null, 4) + ')'
-      // this.d_response = JSON.stringify(result, null, 4)
+    async userSetPublicKey() {
+      const rsaJwk = Keyto.from(this.d_rsaPEM, 'pem').toJwk('public')
+      const ecBlk = Keyto.from(this.d_ecPEM, 'pem').toString('blk', 'private')
+      if (!rsaJwk) return
+      if (!ecBlk) return
+      const rsa_n = Buffer.from(rsaJwk.n, 'base64').toString('hex').toUpperCase()
+      const rsa_e = Buffer.from(rsaJwk.e, 'base64').toString('hex').toUpperCase()
+      const rsa_en = rsa_e + rsa_n
+      const sha256 = Hasha(rsa_en, { algorithm: 'sha256' }).toUpperCase()
+      const key = ecdsa.keyFromPrivate(ecBlk)
+      const sig = ecdsa.sign(sha256, key)
+      const sig_r = sig.r.toString('hex')
+      const sig_s = sig.s.toString('hex')
+      const proto = {
+        rsa_n,
+        rsa_e,
+        sig_r,
+        sig_s
+      }
+      const result = await this.$usb.cmd('UserSetPublicKey', proto)
+      this.d_request = `abckey.cmd("UserSetPublicKey", ` + JSON.stringify(proto, null, 4) + ')'
+      this.d_response = JSON.stringify(result, null, 4)
     }
   }
 }
