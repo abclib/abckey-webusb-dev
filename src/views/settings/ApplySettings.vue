@@ -32,17 +32,11 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-          </v-col>
+          <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
         </v-row>
       </v-col>
       <v-col cols="6">
-        <v-row>
-          <v-col>
-            <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
+        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
