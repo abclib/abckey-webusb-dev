@@ -35,7 +35,7 @@ import Keyto from '@trust/keyto'
 import Hasha from 'hasha'
 import { ec } from 'elliptic'
 
-const ecdsa = new ec('secp256k1');
+const ecdsa = new ec('secp256k1')
 
 export default {
   name: 'ChangePin',
@@ -67,8 +67,12 @@ thsrjXg4wP/lojqdkWBhSmQAzc4Vjw==
       const ecBlk = Keyto.from(this.d_ecPEM, 'pem').toString('blk', 'private')
       if (!rsaJwk) return
       if (!ecBlk) return
-      const rsa_n = Buffer.from(rsaJwk.n, 'base64').toString('hex').toUpperCase()
-      const rsa_e = Buffer.from(rsaJwk.e, 'base64').toString('hex').toUpperCase()
+      const rsa_n = Buffer.from(rsaJwk.n, 'base64')
+        .toString('hex')
+        .toUpperCase()
+      const rsa_e = Buffer.from(rsaJwk.e, 'base64')
+        .toString('hex')
+        .toUpperCase()
       const rsa_en = rsa_e + rsa_n
       const sha256 = Hasha(rsa_en, { algorithm: 'sha256' }).toUpperCase()
       const key = ecdsa.keyFromPrivate(ecBlk)
@@ -76,8 +80,8 @@ thsrjXg4wP/lojqdkWBhSmQAzc4Vjw==
       const sig_r = sig.r.toString('hex')
       const sig_s = sig.s.toString('hex')
       const proto = {
-        rsa_n,
         rsa_e,
+        rsa_n,
         sig_r,
         sig_s
       }
