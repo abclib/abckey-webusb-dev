@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d229494"],{dd97:function(n,e,t){"use strict";t.r(e);var u=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[t("router-view")],1)},c=[],i={name:"bitcoin"},r=i,l=t("2877"),o=Object(l["a"])(r,u,c,!1,null,null,null);e["default"]=o.exports}}]);

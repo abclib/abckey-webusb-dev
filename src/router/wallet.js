@@ -19,6 +19,6 @@ const Receive = {
 export default {
   path: `/${__DIR__}`,
   redirect: `/${__DIR__}/Account`,
-  component: () => import(/* webpackChunkName: "wallet" */ `@/views/${__DIR__}/index`),
+  component: () => import(`@/views/${__DIR__}/index`),
   children: [Account, Receive]
 }

@@ -19,6 +19,6 @@ const UserGetMnemonics = {
 export default {
   path: `/${__DIR__}`,
   redirect: `/${__DIR__}/UserSetPublickey`,
-  component: () => import(/* webpackChunkName: "abc1" */ `@/views/${__DIR__}/index`),
+  component: () => import(`@/views/${__DIR__}/index`),
   children: [UserSetPublickey, UserGetMnemonics]
 }
