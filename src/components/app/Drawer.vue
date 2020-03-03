@@ -48,6 +48,20 @@ export default {
   data: () => ({
     d_nav: [
       {
+        icon: 'mdi-wallet',
+        title: 'Wallet',
+        snav: [
+          {
+            title: 'Account',
+            path: '/Wallet/Account'
+          },
+          {
+            title: 'Receive',
+            path: '/Wallet/Receive'
+          }
+        ]
+      },
+      {
         icon: 'mdi-alpha-a-circle-outline',
         title: 'Bitcoin',
         snav: [

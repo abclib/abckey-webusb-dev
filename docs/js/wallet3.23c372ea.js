@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["wallet3"],{"6b55":function(e,n,t){"use strict";t.r(n);var l=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("router-view")],1)},i=[],r={name:"bitcoin"},u=r,a=t("2877"),c=Object(a["a"])(u,l,i,!1,null,null,null);n["default"]=c.exports}}]);

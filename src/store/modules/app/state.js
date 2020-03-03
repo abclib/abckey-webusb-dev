@@ -1,4 +1,4 @@
 export default {
-  language: '',
+  language: 'en-US',
   theme: 'light'
 }
