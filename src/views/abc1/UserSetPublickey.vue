@@ -32,7 +32,7 @@
 
 <script>
 import Keyto from '@trust/keyto'
-import Hasha from 'hasha'
+import Hash from 'hash.js'
 import { ec } from 'elliptic'
 
 const ecdsa = new ec('secp256k1')
@@ -74,7 +74,10 @@ thsrjXg4wP/lojqdkWBhSmQAzc4Vjw==
         .toString('hex')
         .toUpperCase()
       const rsa_en = rsa_e + rsa_n
-      const sha256 = Hasha(rsa_en, { algorithm: 'sha256' }).toUpperCase()
+      const sha256 = Hash.sha256()
+        .update(rsa_en)
+        .digest('hex')
+        .toUpperCase()
       const key = ecdsa.keyFromPrivate(ecBlk)
       const sig = ecdsa.sign(sha256, key)
       const sig_r = sig.r.toString('hex')
