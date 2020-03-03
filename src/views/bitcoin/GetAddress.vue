@@ -30,9 +30,9 @@
         </v-row>
         <v-row>
           <ul>
-            <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki</a></li>
-            <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki" target="_blank">https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki</a></li>
-            <li><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" target="_blank">https://github.com/satoshilabs/slips/blob/master/slip-0044.md</a></li>
+            <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
+            <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki" target="_blank">bip-0045.mediawiki</a></li>
+            <li><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" target="_blank">slip-0044.md</a></li>
           </ul>
         </v-row>
       </v-col>
