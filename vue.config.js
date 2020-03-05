@@ -5,6 +5,7 @@ const IS_DEV = process.env.NODE_ENV === 'production' ? false : true
 
 module.exports = {
   publicPath: IS_DEV ? '/' : '/abckey-webusb-demo/',
+  outputDir: 'docs',
   productionSourceMap: IS_DEV,
   integrity: true,
   css: {
