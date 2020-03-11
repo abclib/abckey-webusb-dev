@@ -69,29 +69,15 @@ export default {
       return address_n
     }
   },
-  mounted() {
-    const multisig = {
-      pubkeys: [
-        {
-          node: 'xpub661MyMwAqRbcF1zGijBb2K6x9YiJPh58xpcCeLvTxMX6spkY3PcpJ4ABcCyWfskq5DDxM3e6Ez5ePCqG5bnPUXR4wL8TZWyoDaUdiWW7bKy',
-          address_n: [1]
-        },
-        {
-          node: 'xpub661MyMwAqRbcF1zGijBb2K6x9YiJPh58xpcCeLvTxMX6spkY3PcpJ4ABcCyWfskq5DDxM3e6Ez5ePCqG5bnPUXR4wL8TZWyoDaUdiWW7bKy',
-          address_n: [2]
-        },
-        {
-          node: 'xpub661MyMwAqRbcF1zGijBb2K6x9YiJPh58xpcCeLvTxMX6spkY3PcpJ4ABcCyWfskq5DDxM3e6Ez5ePCqG5bnPUXR4wL8TZWyoDaUdiWW7bKy',
-          address_n: [3]
-        }
-      ],
-      m: 2
+  watch: {
+    async d_scriptType(val) {
+      if (val === 'SPENDMULTISIG') this.d_path = `m/45'/0/0/0`
     }
-    this.d_multisig = JSON.stringify(multisig, null, 4)
   },
   methods: {
     async getAddr() {
       if (!this.c_addressN) return (this.d_response = 'path error')
+      if (this.d_scriptType === 'SPENDMULTISIG') await this._getPbk()
       const proto = {
         address_n: this.c_addressN,
         script_type: this.d_scriptType,
@@ -101,6 +87,29 @@ export default {
       const result = await this.$usb.getAddr(proto)
       this.d_request = `abckey.cmd("GetAddress", ` + JSON.stringify(proto, null, 4) + ')'
       this.d_response = JSON.stringify(result, null, 4)
+    },
+    async _getPbk() {
+      const result = await this.$usb.cmd('GetPublicKey', {
+        address_n: [2147483693, 0],
+        script_type: 'SPENDMULTISIG'
+      })
+      this.d_multisig = JSON.stringify(
+        {
+          pubkeys: [
+            {
+              node: result.data.xpub,
+              address_n: [0, 0]
+            },
+            {
+              node: 'xpub6AxX9fezLTUJwu2FrRkLcnLb6hdeiBXqabWasqnfvyacrgok92VJ3H963Qb28LH56TZD2T5HkHCB9HB74ADS6c4SEjQjenb2DG4xxFo7NWU',
+              address_n: [0, 0]
+            }
+          ],
+          m: 2
+        },
+        null,
+        4
+      )
     }
   }
 }

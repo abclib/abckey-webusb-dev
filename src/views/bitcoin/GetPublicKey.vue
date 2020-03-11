@@ -15,18 +15,7 @@
             <v-text-field v-model="d_path" label="path" hide-details />
           </v-col>
           <v-col cols="4">
-            <v-select
-              v-model="d_scriptType"
-              :items="[
-                { text: 'SPENDADDRESS', value: 0 },
-                { text: 'SPENDMULTISIG', value: 1 },
-                { text: 'EXTERNAL', value: 2 },
-                { text: 'SPENDWITNESS', value: 3 },
-                { text: 'SPENDP2SHWITNESS', value: 4 }
-              ]"
-              label="script_type"
-              hide-details
-            ></v-select>
+            <v-select v-model="d_scriptType" :items="['SPENDADDRESS', 'SPENDMULTISIG', 'EXTERNAL', 'SPENDWITNESS', 'SPENDP2SHWITNESS']" label="script_type" hide-details></v-select>
           </v-col>
         </v-row>
         <v-row>
@@ -56,11 +45,16 @@ export default {
   name: 'GetPublicKey',
   data: () => ({
     d_path: `m/49'/0'/0'/0/0`,
-    d_scriptType: 0,
+    d_scriptType: 'SPENDP2SHWITNESS',
     d_showDisplay: false,
     d_response: '',
     d_request: ''
   }),
+  watch: {
+    d_scriptType(val) {
+      if (val === 'SPENDMULTISIG') this.d_path = `m/45'/0`
+    }
+  },
   computed: {
     c_addressN() {
       let address_n = []
