@@ -30,7 +30,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-textarea label="reftxs_json" v-model="d_utxo" auto-grow></v-textarea>
+            <v-textarea label="utxo_json" v-model="d_utxo" auto-grow></v-textarea>
           </v-col>
         </v-row>
         <v-row>
