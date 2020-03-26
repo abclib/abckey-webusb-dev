@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@abckey/webusb": "0.0.18",
+    "@abckey/webusb": "0.0.21",
     "@trust/keyto": "^1.0.1",
     "axios": "^0.19.2",
     "bignumber.js": "^9.0.0",
