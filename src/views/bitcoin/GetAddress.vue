@@ -15,6 +15,9 @@
             <v-text-field v-model="d_path" label="path" hide-details />
           </v-col>
           <v-col cols="4">
+            <v-select v-model="d_name" :items="['Bitcoin', 'Dogecoin']" label="coin_name" hide-details></v-select>
+          </v-col>
+          <v-col cols="4">
             <v-select v-model="d_scriptType" :items="['SPENDADDRESS', 'SPENDMULTISIG', 'EXTERNAL', 'SPENDWITNESS', 'SPENDP2SHWITNESS']" label="script_type" hide-details></v-select>
           </v-col>
         </v-row>
@@ -50,6 +53,7 @@
 export default {
   name: 'GetAddress',
   data: () => ({
+    d_name: 'Bitcoin',
     d_path: `m/49'/0'/0'/0/0`,
     d_scriptType: 'SPENDP2SHWITNESS',
     d_showDisplay: false,
@@ -97,6 +101,7 @@ export default {
     async getAddr() {
       if (!this.c_addressN) return (this.d_response = 'path error')
       const proto = {
+        coin_name: this.d_name,
         address_n: this.c_addressN,
         script_type: this.d_scriptType,
         show_display: this.d_showDisplay,
