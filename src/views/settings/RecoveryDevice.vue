@@ -1,41 +1,28 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
-        <v-row>
-          <v-col>
-            <p>Start recovery workflow asking user for specific words of mnemonic</p>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="recoveryDevice()" color="primary" large block>Recovery Device</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="checkSeed()" color="success" large block>Check Seed</v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-select
-              v-model="d_wordCount"
-              :items="[
-                { text: '12 word', value: 12 },
-                { text: '18 word', value: 18 },
-                { text: '24 word', value: 24 }
-              ]"
-              label="word_count"
-              hide-details
-            ></v-select>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
+      <v-col cols="2">
+        <v-btn @click="recoveryDevice()" color="primary" large block>Recovery Device</v-btn>
+        <br />
+        <v-btn @click="checkSeed()" color="success" large block>Check Seed</v-btn>
+        <br />
+        <v-select
+          v-model="d_wordCount"
+          :items="[
+            { text: '12 word', value: 12 },
+            { text: '18 word', value: 18 },
+            { text: '24 word', value: 24 }
+          ]"
+          label="word_count"
+          hide-details
+        ></v-select>
       </v-col>
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>

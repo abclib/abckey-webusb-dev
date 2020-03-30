@@ -1,55 +1,35 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="signTx()" color="primary" large block>Sign Transaction</v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-select v-model="d_coinName" :items="d_coinList" label="coin_name" hide-details></v-select>
-          </v-col>
-          <v-col cols="4">
-            <v-text-field v-model="d_version" label="version" hide-details />
-          </v-col>
-          <v-col cols="4">
-            <v-text-field v-model="d_lockTime" label="lock_time" hide-details />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="inputs_json" v-model="d_inputs" auto-grow></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="outputs_json" v-model="d_outputs" auto-grow></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="utxo_json" v-model="d_utxo" auto-grow></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <ul>
-              <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
-              <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki" target="_blank">bip-0045.mediawiki</a></li>
-              <li><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" target="_blank">slip-0044.md</a></li>
-            </ul>
-          </v-col>
-        </v-row>
+      <!-- Command -->
+      <v-col cols="2">
+        <v-btn @click="signTx()" color="primary" large block>Sign Transaction</v-btn>
+        <br />
+        <v-select v-model="d_coinName" :items="d_coinList" label="coin_name" hide-details></v-select>
+        <br />
+        <v-text-field v-model="d_version" label="version" hide-details />
+        <br />
+        <v-text-field v-model="d_lockTime" label="lock_time" hide-details />
+        <br />
+        <v-textarea label="inputs_json" v-model="d_inputs"></v-textarea>
+        <br />
+        <v-textarea label="outputs_json" v-model="d_outputs"></v-textarea>
+        <br />
+        <v-textarea label="utxo_json" v-model="d_utxo"></v-textarea>
+        <br />
+        <ul>
+          <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
+          <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki" target="_blank">bip-0045.mediawiki</a></li>
+          <li><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" target="_blank">slip-0044.md</a></li>
+        </ul>
       </v-col>
 
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
@@ -122,6 +102,7 @@ export default {
     const utxo = [
       {
         version: 2,
+        lock_time: 0,
         hash: 'b3e400a6ec426652f22e7cc9056388713b27040ecd6620820b4e88e422b9dbb4',
         inputs: [
           {
@@ -140,8 +121,7 @@ export default {
             amount: '292551',
             script_pubkey: 'a9141191ece76da3009434dd6bd2bf8a36296e032a1987'
           }
-        ],
-        lock_time: 0
+        ]
       }
     ]
     this.d_inputs = JSON.stringify(inputs, null, 4)
@@ -158,6 +138,7 @@ export default {
         version: this.d_version,
         lock_time: this.d_lockTime
       }
+      this.d_request = `abckey.signTx(` + JSON.stringify(proto, null, 4) + ')'
       const result = await this.$usb.signTx(proto)
       this.d_response = JSON.stringify(result, null, 4)
     }

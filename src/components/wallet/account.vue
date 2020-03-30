@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-0" fluid>
+  <v-container class="pa-0 text-left" fluid>
     <v-card class="px-3">
       <v-row>
         <v-col class="text-center">
@@ -366,7 +366,7 @@ export default {
     },
     async upBalance() {
       this.d_loading.upBalance = true
-      const { data } = await Axios.get(`https://btc.abckey.com/xpub/${this.xpub}?details=txs&tokens=used&t=${new Date().getTime()}`)
+      const { data } = await Axios.get(`https://api.abckey.com/${this.symbol}/xpub/${this.xpub}?details=txs&tokens=used&t=${new Date().getTime()}`)
       this.d_balance = this.sat2btc(data.balance)
       this.d_totalReceived = this.sat2btc(data.totalReceived)
       this.d_totalSent = this.sat2btc(data.totalSent)
@@ -379,32 +379,17 @@ export default {
     },
     async upRate() {
       this.d_loading.upRate = true
-      const { data } = await Axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${this.name}&vs_currencies=${this.currency}&t=${new Date().getTime()}`)
+      const { data } = await Axios.get(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${this.name}&vs_currencies=${this.currency}&t=${new Date().getTime()}`
+      )
       this.d_rate = data[this.name][this.currency]
       this.d_loading.upRate = false
     },
-    sat2btc: sat =>
-      BN(sat)
-        .div(100000000)
-        .toNumber(),
-    btc2str: btc =>
-      BN(btc)
-        .dp(8, 1)
-        .toFormat(),
-    cash2str: num =>
-      BN(num)
-        .dp(2, 1)
-        .toFormat(2, 1),
-    btc2cash: (sat, rate) =>
-      BN(sat)
-        .times(rate)
-        .dp(2, 1)
-        .toFormat(),
-    unix2utc: time =>
-      new Date(time * 1000)
-        .toJSON()
-        .substr(0, 19)
-        .replace('T', ' '),
+    sat2btc: sat => BN(sat).div(100000000).toNumber(),
+    btc2str: btc => BN(btc).dp(8, 1).toFormat(),
+    cash2str: num => BN(num).dp(2, 1).toFormat(2, 1),
+    btc2cash: (sat, rate) => BN(sat).times(rate).dp(2, 1).toFormat(),
+    unix2utc: time => new Date(time * 1000).toJSON().substr(0, 19).replace('T', ' '),
     _fixTxs(txs, tokens) {
       for (let i = 0; i < txs.length; i++) {
         const oldValue = i + 1 === txs.length ? 0 : txs[i + 1].value
@@ -465,6 +450,10 @@ export default {
 </script>
 
 <style lang="scss">
+.account {
+  width: inherit;
+}
+
 .blur {
   filter: blur(2px);
 }

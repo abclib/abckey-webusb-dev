@@ -1,50 +1,37 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
-        <v-row>
-          <v-col>
-            <p>Ask device to do initialization involving user interaction</p>
-          </v-col>
-        </v-row>
-        <v-row align="center">
-          <v-col cols="4">
-            <v-btn @click="resetDevice()" color="primary" large block>Reset Device</v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-select
-              v-model="d_strength"
-              :items="[
-                { text: '12 word', value: 128 },
-                { text: '18 word', value: 192 },
-                { text: '24 word', value: 256 }
-              ]"
-              label="Strength"
-              hide-details
-            ></v-select>
-          </v-col>
-          <v-col cols="4">
-            <v-select
-              v-model="d_backupType"
-              :items="[
-                { text: 'Bip39', value: 0 },
-                { text: 'Slip39_Basic', value: 1 },
-                { text: 'Slip39_Advanced', value: 2 }
-              ]"
-              label="backup_type"
-              hide-details
-            ></v-select>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
+      <v-col cols="2">
+        <v-btn @click="resetDevice()" color="primary" large block>Reset Device</v-btn>
+        <br />
+        <v-select
+          v-model="d_strength"
+          :items="[
+            { text: '12 word', value: 128 },
+            { text: '18 word', value: 192 },
+            { text: '24 word', value: 256 }
+          ]"
+          label="Strength"
+          hide-details
+        ></v-select>
+        <br />
+        <v-select
+          v-model="d_backupType"
+          :items="[
+            { text: 'Bip39', value: 0 },
+            { text: 'Slip39_Basic', value: 1 },
+            { text: 'Slip39_Advanced', value: 2 }
+          ]"
+          label="backup_type"
+          hide-details
+        ></v-select>
       </v-col>
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>

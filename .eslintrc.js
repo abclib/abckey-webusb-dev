@@ -3,12 +3,14 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/typescript/recommended', '@vue/prettier', '@vue/prettier/@typescript-eslint'],
   parserOptions: {
-    parser: 'babel-eslint'
+    ecmaVersion: 2020
   },
   rules: {
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    // 'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 }

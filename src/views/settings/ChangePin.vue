@@ -1,27 +1,17 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
-        <v-row>
-          <v-col>
-            <p>Starts workflow for setting/changing/removing the PIN</p>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="setPin()" color="primary" large block>Change Pin</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="offPin()" color="error" large block>Remove Pin</v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
+      <v-col cols="2">
+        <v-btn @click="setPin()" color="primary" large block>Change Pin</v-btn>
+        <br />
+        <v-btn @click="offPin()" color="error" large block>Remove Pin</v-btn>
       </v-col>
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>

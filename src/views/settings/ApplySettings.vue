@@ -1,41 +1,34 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
-        <v-row>
+      <v-col cols="2">
+        <v-btn @click="usePassphrase(true)" color="success" large block>Enable Passphrase</v-btn>
+        <br />
+        <v-btn @click="usePassphrase(false)" color="error" large block>Disabled Passphrase</v-btn>
+        <br />
+        <v-row align="center">
           <v-col>
-            <p>Change language and/or label of the device</p>
-          </v-col>
-        </v-row>
-        <v-row align="center">
-          <v-col cols="4">
-            <v-btn @click="usePassphrase(true)" color="success" large block>Enable Passphrase</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="usePassphrase(false)" color="error" large block>Disabled Passphrase</v-btn>
-          </v-col>
-        </v-row>
-        <v-row align="center">
-          <v-col cols="4">
             <v-text-field v-model="d_label" label="label" hide-details />
           </v-col>
-          <v-col cols="4">
+          <v-col>
             <v-btn @click="setLabel()" color="primary" large block>Set Label</v-btn>
           </v-col>
         </v-row>
         <v-row align="center">
-          <v-col cols="4">
+          <v-col>
             <v-text-field v-model="d_dalay" type="number" label="auto_lock_delay_ms" hide-details />
           </v-col>
-          <v-col cols="4">
-            <v-btn @click="lockDelay()" color="primary" large block>Auto Lock Delay (ms)</v-btn>
+          <v-col>
+            <v-btn @click="lockDelay()" color="primary" large block>Set Delay</v-btn>
           </v-col>
         </v-row>
-        <v-row>
-          <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-        </v-row>
       </v-col>
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>

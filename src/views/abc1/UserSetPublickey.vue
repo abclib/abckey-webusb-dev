@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
+      <v-col cols="2">
         <v-row>
           <v-col cols="4">
             <v-btn @click="userSetPublicKey()" color="primary" large block>User Set Public Key</v-btn>
@@ -9,21 +9,21 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-textarea v-model="d_rsaPEM" label="RSA Public Key (PEM)" auto-grow></v-textarea>
+            <v-textarea v-model="d_rsaPEM" label="RSA Public Key (PEM)"></v-textarea>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-textarea v-model="d_ecPEM" label="ECDSA Private Key (PEM)" auto-grow></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+            <v-textarea v-model="d_ecPEM" label="ECDSA Private Key (PEM)"></v-textarea>
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
@@ -67,17 +67,10 @@ thsrjXg4wP/lojqdkWBhSmQAzc4Vjw==
       const ecBlk = Keyto.from(this.d_ecPEM, 'pem').toString('blk', 'private')
       if (!rsaJwk) return
       if (!ecBlk) return
-      const rsa_n = Buffer.from(rsaJwk.n, 'base64')
-        .toString('hex')
-        .toUpperCase()
-      const rsa_e = Buffer.from(rsaJwk.e, 'base64')
-        .toString('hex')
-        .toUpperCase()
+      const rsa_n = Buffer.from(rsaJwk.n, 'base64').toString('hex').toUpperCase()
+      const rsa_e = Buffer.from(rsaJwk.e, 'base64').toString('hex').toUpperCase()
       const rsa_en = rsa_e + rsa_n
-      const sha256 = Hash.sha256()
-        .update(rsa_en)
-        .digest('hex')
-        .toUpperCase()
+      const sha256 = Hash.sha256().update(rsa_en).digest('hex').toUpperCase()
       const key = ecdsa.keyFromPrivate(ecBlk)
       const sig = ecdsa.sign(sha256, key)
       const sig_r = sig.r.toString('hex')

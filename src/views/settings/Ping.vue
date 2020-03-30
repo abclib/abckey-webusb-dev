@@ -1,38 +1,28 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="6">
-        <v-row>
+      <v-col cols="2">
+        <v-btn @click="buttonProtection()" color="primary" large block>Button Protection</v-btn>
+        <br />
+        <v-btn @click="pinProtection(false)" color="primary" large block>Pin Protection</v-btn>
+        <br />
+        <v-btn @click="passphraseProtection(false)" color="primary" large block>Passphrase Protectionn</v-btn>
+        <br />
+        <v-row align="center">
           <v-col>
-            <p>Test if the device is alive, device sends back the message in Success response</p>
-          </v-col>
-        </v-row>
-        <v-row align="center">
-          <v-col cols="4">
-            <v-btn @click="buttonProtection()" color="primary" large block>Button Protection</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="pinProtection(false)" color="primary" large block>Pin Protection</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn @click="passphraseProtection(false)" color="primary" large block>Passphrase Protectionn</v-btn>
-          </v-col>
-        </v-row>
-        <v-row align="center">
-          <v-col cols="4">
             <v-text-field v-model="d_msg" label="msg" hide-details />
           </v-col>
-          <v-col cols="4">
+          <v-col>
             <v-btn @click="testMsg()" color="primary" large block>Test Msg</v-btn>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
-          </v-col>
-        </v-row>
       </v-col>
-      <v-col cols="6">
+      <!-- Request -->
+      <v-col cols="5">
+        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+      </v-col>
+      <!-- Response  -->
+      <v-col cols="5">
         <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
