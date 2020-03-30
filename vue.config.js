@@ -39,7 +39,7 @@ const vueConfig = {
   publicPath: IS_DEV ? '/' : '/',
   outputDir: 'docs',
   productionSourceMap: IS_DEV,
-  integrity: true,
+  integrity: false,
   css: {
     extract: false,
     sourceMap: IS_DEV,
