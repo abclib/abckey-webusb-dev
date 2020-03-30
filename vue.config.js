@@ -36,9 +36,9 @@ const vueServe = c => {
 }
 
 const vueConfig = {
-  publicPath: IS_DEV ? '/' : '/abckey-webusb-dev/',
+  publicPath: IS_DEV ? '/' : '/',
   outputDir: 'docs',
-  productionSourceMap: true,
+  productionSourceMap: IS_DEV,
   integrity: true,
   css: {
     extract: false,
