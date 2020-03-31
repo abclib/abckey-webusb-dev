@@ -46,14 +46,14 @@
               <v-icon v-text="nav.meta.icon"></v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="nav.meta.title"></v-list-item-title>
+              <v-list-item-title v-text="$t(nav.meta.title)"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-group v-if="nav.meta && nav.children" :prepend-icon="nav.meta.icon" no-action>
             <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title v-text="nav.meta.title"></v-list-item-title>
+                <v-list-item-title v-text="$t(nav.meta.title)"></v-list-item-title>
               </v-list-item-content>
             </template>
             <v-list-item v-for="snav in nav.children" :key="snav.path" :to="`${nav.path}/${snav.path}`">
@@ -61,7 +61,7 @@
                 <v-icon v-text="snav.meta.icon"></v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="snav.meta.title"></v-list-item-title>
+                <v-list-item-title v-text="$t(snav.meta.title)"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group>

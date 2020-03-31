@@ -40,7 +40,7 @@ const routes: Array<RouteConfig> = [
     path: '/Pin',
     meta: {
       icon: 'mdi-key',
-      title: 'Pin'
+      title: 'PIN'
     },
     component: () => import(/* webpackChunkName: "Pin" */ '@/views/Pin.vue')
   },
