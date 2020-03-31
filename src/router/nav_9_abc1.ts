@@ -1,5 +1,13 @@
 const __DIR__ = 'ABC1'
 
+const Protocol = {
+  path: 'Protocol',
+  meta: {
+    title: 'Protocol'
+  },
+  component: () => import(`@/views/${__DIR__}/Protocol`)
+}
+
 const UserSetPublickey = {
   path: 'UserSetPublickey',
   meta: {
@@ -23,5 +31,5 @@ export default {
     title: 'ABC1 Extension'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [UserSetPublickey, UserGetMnemonics]
+  children: [Protocol, UserSetPublickey, UserGetMnemonics]
 }
