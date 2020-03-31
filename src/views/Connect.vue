@@ -7,6 +7,7 @@
         <div class="mt-7">
           <v-btn class="mx-2" color="primary" @click="add()"><v-icon left>mdi-plus</v-icon>{{ $t('Check For Device') }}</v-btn>
         </div>
+        <v-overlay :value="d_overlay" z-index="99"></v-overlay>
       </div>
     </v-layout>
   </v-container>
@@ -15,16 +16,20 @@
 <script>
 export default {
   name: 'Connect',
-  data: () => ({}),
+  data: () => ({
+    d_overlay: false
+  }),
   computed: {},
   watch: {},
   methods: {
     async add() {
+      this.d_overlay = true
       const msg = await this.$usb.add()
+      this.d_overlay = false
       if (msg) this.$router.push({ path: `/Loading` })
     }
   },
-  created() {
+  mounted() {
     this.$usb.cmd('ClearSession', null, true)
   }
 }
