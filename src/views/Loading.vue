@@ -20,6 +20,7 @@ export default {
   watch: {
     async c_msg(msg) {
       if (msg.type === 'PinMatrixRequest') this.$router.push({ path: `/Pin` })
+      if (msg.type === 'PassphraseRequest') this.$router.push({ path: `/Passphrase` })
       if (msg.type === 'PublicKey') this.$router.push({ path: `/Account` })
     }
   },
