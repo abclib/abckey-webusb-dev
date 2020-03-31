@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="d_show" max-width="333" persistent scrollable>
+    <v-dialog v-model="d_show" width="initial" persistent scrollable>
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
       </template>
