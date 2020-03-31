@@ -21,7 +21,7 @@ webusb.onAdd(e => {
 })
 
 webusb.onErr(e => {
-  Store.__s('usb.err', e.message)
+  Store.__s('usb.err', e)
   Router.push('/Connect')
 })
 
