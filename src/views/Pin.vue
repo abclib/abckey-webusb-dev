@@ -48,9 +48,8 @@ export default {
         if (msg.data.type === 'PinMatrixRequestType_Current') this.d_title = 'PIN'
         if (msg.data.type === 'PinMatrixRequestType_NewFirst') this.d_title = 'Enter a new PIN'
         if (msg.data.type === 'PinMatrixRequestType_NewSecond') this.d_title = 'Re-enter PIN'
-      } else {
-        this.$router.push({ path: `/Loading` })
-      }
+      } else if (msg.type === 'PassphraseRequest') this.$router.push({ path: `/Passphrase` })
+      else this.$router.push({ path: `/Loading` })
       this.d_loading = false
       this.d_pin = ''
     }

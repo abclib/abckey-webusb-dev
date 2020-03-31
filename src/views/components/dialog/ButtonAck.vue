@@ -1,7 +1,10 @@
 <template>
-  <v-dialog v-model="d_show" max-width="333" persistent scrollable>
+  <v-dialog v-model="d_show" max-width="555" persistent scrollable>
     <v-card>
-      <v-card-title class="headline">ButtonAck</v-card-title>
+      <v-card-title class="headline">
+        <v-icon>mdi-gesture-tap-button</v-icon>
+        <span>ButtonAck</span>
+      </v-card-title>
       <v-card-text class="headline">Confirm the action on your device!</v-card-text>
     </v-card>
   </v-dialog>
@@ -10,7 +13,7 @@
 <script>
 export default {
   data: () => ({
-    d_show: false
+    d_show: true
   }),
   computed: {
     c_msg: vm => vm.$store.__s('usb.msg')

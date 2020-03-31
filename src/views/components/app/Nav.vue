@@ -90,6 +90,7 @@ export default {
       this.$router.replace('/Settings')
     },
     async removes() {
+      this.$router.replace('/Connect')
       window.location.reload(true)
     }
   }

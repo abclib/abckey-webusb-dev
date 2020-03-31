@@ -3,10 +3,11 @@
     <app-nav />
     <app-content />
     <app-footer />
-    <!--<dialog-button-ack />
-    <dialog-pass-ack />
+
+    <!--<dialog-pass-ack />
     <dialog-word-ack />
     <dialog-failure /> -->
+    <dialog-button-ack />
     <dialog-error />
   </v-app>
 </template>
@@ -14,11 +15,13 @@
 <script>
 import appNav from '@/views/components/app/Nav'
 import dialogError from '@/views/components/dialog/Error'
+import dialogButtonAck from '@/views/components/dialog/ButtonAck'
 
 export default {
   name: 'App',
   components: {
     appNav,
+    dialogButtonAck,
     dialogError
   },
   data: () => ({}),
