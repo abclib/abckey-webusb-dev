@@ -28,6 +28,13 @@ export default {
       }
     }
   },
-  methods: {}
+  i18n: {
+    messages: {
+      zhCN: {
+        Error: '错误',
+        Close: '关闭'
+      }
+    }
+  }
 }
 </script>
