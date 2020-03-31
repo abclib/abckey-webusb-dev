@@ -3,7 +3,7 @@
     <v-layout class="d-flex justify-center align-center text-center">
       <div>
         <v-card width="333">
-          <v-card-title class="headline">{{ d_title }}</v-card-title>
+          <v-card-title class="headline">{{ $t(d_title) }}</v-card-title>
           <v-card-text>
             <div class="input">
               <v-btn @click="deletePin()" outlined block large>
@@ -22,7 +22,7 @@
             <v-btn class="mt-3" @click="cancel()" color="secondary" large depressed block>{{ $t('Cancel') }}</v-btn>
           </v-card-text>
         </v-card>
-        <v-overlay :value="d_loading" absolute>
+        <v-overlay :value="d_loading" z-index="99">
           <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
       </div>
@@ -39,21 +39,6 @@ export default {
     d_pin: '',
     d_btns: [7, 8, 9, 4, 5, 6, 1, 2, 3]
   }),
-  computed: {
-    c_msg: vm => vm.$store.__s('usb.msg')
-  },
-  watch: {
-    async c_msg(msg) {
-      if (msg.type === 'PinMatrixRequest') {
-        if (msg.data.type === 'PinMatrixRequestType_Current') this.d_title = 'PIN'
-        if (msg.data.type === 'PinMatrixRequestType_NewFirst') this.d_title = 'Enter a new PIN'
-        if (msg.data.type === 'PinMatrixRequestType_NewSecond') this.d_title = 'Re-enter PIN'
-      } else if (msg.type === 'PassphraseRequest') this.$router.push({ path: `/Passphrase` })
-      else this.$router.push({ path: `/Loading` })
-      this.d_loading = false
-      this.d_pin = ''
-    }
-  },
   methods: {
     inputPin(value) {
       if (this.d_pin.length > 8) return
@@ -65,7 +50,14 @@ export default {
     },
     async unlock() {
       this.d_loading = true
-      await this.$usb.cmd('PinMatrixAck', { pin: this.d_pin })
+      const msg = await this.$usb.cmd('PinMatrixAck', { pin: this.d_pin })
+      if (msg.type === 'PinMatrixRequest') {
+        if (msg.data.type === 'PinMatrixRequestType_Current') this.d_title = 'PIN'
+        if (msg.data.type === 'PinMatrixRequestType_NewFirst') this.d_title = 'Enter a new PIN'
+        if (msg.data.type === 'PinMatrixRequestType_NewSecond') this.d_title = 'Re-enter PIN'
+      } else if (msg.type === 'PassphraseRequest') this.$router.push({ path: `/Passphrase` })
+      else this.$router.push({ path: `/Loading` })
+      this.d_loading = false
     },
     async cancel() {
       this.$router.push({ path: `/Loading` })
@@ -76,6 +68,7 @@ export default {
       zhCN: {
         PIN: 'PIN 码',
         Unlock: '解锁',
+        Cancel: '取消',
         'Enter a new PIN': '输入一个新PIN码',
         'Re-enter PIN': '再次输入PIN码'
       }

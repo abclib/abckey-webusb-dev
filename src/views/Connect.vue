@@ -7,7 +7,7 @@
         <div class="mt-7">
           <v-btn class="mx-2" color="primary" @click="add()"><v-icon left>mdi-plus</v-icon>{{ $t('Check For Device') }}</v-btn>
         </div>
-        <v-overlay :value="d_overlay" z-index="99"></v-overlay>
+        <v-overlay :value="d_overlay" z-index="99" opacity=".7"></v-overlay>
       </div>
     </v-layout>
   </v-container>
@@ -19,8 +19,6 @@ export default {
   data: () => ({
     d_overlay: false
   }),
-  computed: {},
-  watch: {},
   methods: {
     async add() {
       this.d_overlay = true
@@ -29,8 +27,13 @@ export default {
       if (msg) this.$router.push({ path: `/Loading` })
     }
   },
-  mounted() {
-    this.$usb.cmd('ClearSession', null, true)
+  i18n: {
+    messages: {
+      zhCN: {
+        'Please Connect ABCKEY': '请连接 ABCKEY',
+        'Check For Device': '检查设备'
+      }
+    }
   }
 }
 </script>

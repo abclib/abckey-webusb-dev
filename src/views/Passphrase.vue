@@ -20,7 +20,7 @@
             <v-btn class="mt-3" @click="cancel()" color="secondary" large depressed block>{{ $t('Cancel') }}</v-btn>
           </v-card-text>
         </v-card>
-        <v-overlay :value="d_loading" absolute>
+        <v-overlay :value="d_loading" z-index="99">
           <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
       </div>
@@ -39,21 +39,16 @@ export default {
     d_loading: false
   }),
   computed: {
-    c_msg: vm => vm.$store.__s('usb.msg'),
     c_err() {
       if (this.d_passphrase1 !== this.d_passphrase2) return this.$t('Passphrases do not match!')
       return null
     }
   },
-  watch: {
-    c_msg() {
-      this.$router.push({ path: `/Loading` })
-    }
-  },
   methods: {
     async enter() {
       this.d_loading = true
-      await this.$usb.cmd('PassphraseAck', { passphrase: this.d_passphrase2 })
+      const msg = await this.$usb.cmd('PassphraseAck', { passphrase: this.d_passphrase2 })
+      if (msg.type === 'PublicKey') this.$router.push({ path: `/Account` })
     },
     async cancel() {
       this.$router.push({ path: `/Loading` })

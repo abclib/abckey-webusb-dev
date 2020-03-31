@@ -93,6 +93,13 @@ export default {
       this.$router.push('/Connect')
       window.location.reload(true)
     }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        Connect: '连接'
+      }
+    }
   }
 }
 </script>
