@@ -1,13 +1,12 @@
 <template>
-  <v-dialog v-model="d_show" width="initial" persistent scrollable>
-    <v-card>
-      <v-card-title class="headline">{{ $t('Error') }}</v-card-title>
-      <v-card-text class="headline">{{ $t(d_msg) }}</v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn @click="d_show = false">{{ $t('Close') }}</v-btn>
-      </v-card-actions>
-    </v-card>
+  <v-dialog v-model="d_show" width="initial" overlay-opacity=".9" persistent>
+    <v-chip @click="close()" x-large label>
+      <span class="px-3 headline">
+        <v-icon left>mdi-message-alert</v-icon>
+        <span>{{ $t(d_msg) }}</span>
+        <v-icon color="error" right>mdi-close-circle-outline</v-icon>
+      </span>
+    </v-chip>
   </v-dialog>
 </template>
 
@@ -18,6 +17,7 @@ export default {
     d_msg: ''
   }),
   computed: {
+    c_err: vm => vm.$store.__s('usb.err'),
     c_msg: vm => vm.$store.__s('usb.msg')
   },
   watch: {
@@ -26,13 +26,27 @@ export default {
         this.d_show = true
         this.d_msg = msg.data.message
       }
+    },
+    c_err(err) {
+      if (!err) return
+      this.d_show = true
+      this.d_msg = err.message
+    }
+  },
+  methods: {
+    close() {
+      this.$store.__s('usb.err', null)
+      this.d_show = false
     }
   },
   i18n: {
     messages: {
       zhCN: {
         Error: '错误',
-        Close: '关闭'
+        Close: '关闭',
+        'Unpaired device.': '未配对设备。',
+        'No device selected.': '未选择设备。',
+        'Unknown message': '未知消息。'
       }
     }
   }

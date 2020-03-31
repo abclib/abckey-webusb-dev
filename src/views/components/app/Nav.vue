@@ -81,16 +81,16 @@ export default {
   },
   methods: {
     connect() {
-      this.$router.replace('/Connect')
+      this.$router.push('/Connect')
     },
     refresh() {
-      this.$router.replace('/Loading')
+      this.$router.push('/Loading')
     },
     settings() {
-      this.$router.replace('/Settings')
+      this.$router.push('/Settings')
     },
     async removes() {
-      this.$router.replace('/Connect')
+      this.$router.push('/Connect')
       window.location.reload(true)
     }
   }

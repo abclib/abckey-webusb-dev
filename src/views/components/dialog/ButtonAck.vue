@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="d_show" width="initial" overlay-opacity=".9" persistent>
-    <v-card>
-      <v-card-title class="headline d-flex justify-center">
-        <v-icon size="24">mdi-gesture-tap-button</v-icon>
-        <span class="ml-1">{{ $t('Please operate on the device!') }}</span>
-      </v-card-title>
-    </v-card>
+    <v-chip x-large label>
+      <span class="px-3 headline">
+        <v-icon left>mdi-gesture-tap-button</v-icon>
+        <span>{{ $t('Please operate on the device!') }}</span>
+      </span>
+    </v-chip>
   </v-dialog>
 </template>
 
