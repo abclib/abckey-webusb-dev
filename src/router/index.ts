@@ -34,10 +34,18 @@ const routes: Array<RouteConfig> = [
   {
     path: '/Pin',
     meta: {
-      icon: 'mdi-textbox-password',
+      icon: 'mdi-key',
       title: 'Pin'
     },
     component: () => import(/* webpackChunkName: "Pin" */ '@/views/Pin.vue')
+  },
+  {
+    path: '/Passphrase',
+    meta: {
+      icon: 'mdi-textbox-password',
+      title: 'Passphrase'
+    },
+    component: () => import(/* webpackChunkName: "Passphrase" */ '@/views/Passphrase.vue')
   },
   {
     path: '/Account',
