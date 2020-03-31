@@ -46,7 +46,7 @@ export default {
     }
   },
   watch: {
-    async c_msg() {
+    c_msg() {
       this.$router.push({ path: `/Loading` })
     }
   },

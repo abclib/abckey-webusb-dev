@@ -23,6 +23,9 @@ export default {
       const msg = await this.$usb.add()
       if (msg) this.$router.push({ path: `/Loading` })
     }
+  },
+  created() {
+    this.$usb.cmd('ClearSession', null, true)
   }
 }
 </script>

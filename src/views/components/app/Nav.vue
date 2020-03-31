@@ -21,13 +21,18 @@
         </template>
 
         <v-list nav>
-          <v-list-item @click="loading()">
+          <v-list-item @click="settings()">
             <v-icon>mdi-cog-outline</v-icon>
-            <v-list-item-title>Settings</v-list-item-title>
+            <v-list-item-title class="ml-2">Settings</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="loading()">
+          <v-list-item @click="refresh()">
             <v-icon>mdi-refresh</v-icon>
-            <v-list-item-title>Refresh</v-list-item-title>
+            <v-list-item-title class="ml-2">Refresh</v-list-item-title>
+          </v-list-item>
+          <v-spacer></v-spacer>
+          <v-list-item @click="removes()">
+            <v-icon>mdi-logout-variant</v-icon>
+            <v-list-item-title class="ml-2">Removes </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -78,11 +83,14 @@ export default {
     connect() {
       this.$router.replace('/Connect')
     },
-    loading() {
+    refresh() {
       this.$router.replace('/Loading')
     },
     settings() {
       this.$router.replace('/Settings')
+    },
+    async removes() {
+      window.location.reload(true)
     }
   }
 }
