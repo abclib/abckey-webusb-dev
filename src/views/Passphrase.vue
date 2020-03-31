@@ -16,7 +16,7 @@
               filled
             />
             <v-text-field label="#2" v-model="d_passphrase2" :error-messages="c_err" :type="d_eye ? 'text' : 'password'" filled />
-            <v-btn @click="enter()" color="primary" :disabled="!!c_err" depressed block>{{ $t('Enter') }}</v-btn>
+            <v-btn @click="enter()" color="primary" :disabled="!!c_err" large depressed block>{{ $t('Enter') }}</v-btn>
             <v-btn class="mt-3" @click="cancel()" color="secondary" large depressed block>{{ $t('Cancel') }}</v-btn>
           </v-card-text>
         </v-card>
