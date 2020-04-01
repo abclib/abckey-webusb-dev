@@ -18,7 +18,7 @@
                 <v-icon>mdi-key</v-icon>
               </v-btn>
             </div>
-            <v-btn class="mt-3" @click="unlock()" color="primary" :disabled="!d_pin.length" large depressed block>{{ $t('Unlock') }}</v-btn>
+            <v-btn class="mt-3" @click="enter()" color="primary" :disabled="!d_pin.length" large depressed block>{{ $t('Enter') }}</v-btn>
             <v-btn class="mt-3" @click="cancel()" color="secondary" large depressed block>{{ $t('Cancel') }}</v-btn>
           </v-card-text>
         </v-card>
@@ -48,15 +48,16 @@ export default {
       if (window.event.keyCode === 13) return
       if (this.d_pin.length > 0) this.d_pin = this.d_pin.substr(0, this.d_pin.length - 1)
     },
-    async unlock() {
+    async enter() {
       this.d_loading = true
       const msg = await this.$usb.cmd('PinMatrixAck', { pin: this.d_pin })
+      this.d_pin = ''
+      this.d_loading = false
       if (msg.type === 'PinMatrixRequest') {
         if (msg.data.type === 'PinMatrixRequestType_Current') this.d_title = 'PIN'
         if (msg.data.type === 'PinMatrixRequestType_NewFirst') this.d_title = 'Enter a new PIN'
         if (msg.data.type === 'PinMatrixRequestType_NewSecond') this.d_title = 'Re-enter PIN'
       } else this.$router.push({ path: `/Loading` })
-      this.d_loading = false
     },
     async cancel() {
       this.$router.push({ path: `/Loading` })
@@ -66,10 +67,10 @@ export default {
     messages: {
       zhCN: {
         PIN: 'PIN 码',
-        Unlock: '解锁',
+        Enter: '确认',
         Cancel: '取消',
-        'Enter a new PIN': '输入一个新PIN码',
-        'Re-enter PIN': '再次输入PIN码'
+        'Enter a new PIN': '输入一个新 PIN 码',
+        'Re-enter PIN': '再次输入 PIN 码'
       }
     }
   }
