@@ -21,11 +21,9 @@ export default {
       script_type: 'SPENDP2SHWITNESS',
       show_display: false
     }
-    const msg = await this.$usb.cmd('GetPublicKey', proto, true)
     await new Promise(resolve => setTimeout(resolve, 1111)) // Give the loading animation some delay
-    if (msg.type === 'PinMatrixRequest') this.$router.push({ path: `/Pin` })
-    else if (msg.type === 'PassphraseRequest') this.$router.push({ path: `/Passphrase` })
-    else if (msg.type === 'PublicKey') this.$router.push({ path: `/Account` })
+    const msg = await this.$usb.cmd('GetPublicKey', proto, true)
+    if (msg.type === 'PublicKey') this.$router.push({ path: `/Account` })
   },
   i18n: {
     messages: {
