@@ -42,10 +42,11 @@ export default {
   i18n: {
     messages: {
       zhCN: {
-        Error: '错误',
         Close: '关闭',
+        'Access denied.': '拒绝访问。',
         'Unpaired device.': '未配对设备。',
         'No device selected.': '未选择设备。',
+        'Device disconnected': '设备已断开',
         'Unknown message': '未知消息。',
         'The transfer was cancelled.': '传输已取消。',
         'Device not initialized': '设备未初始化。',
