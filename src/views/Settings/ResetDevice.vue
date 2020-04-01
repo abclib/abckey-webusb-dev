@@ -2,6 +2,8 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
+        <v-btn @click="wipeDevice()" color="error" large block>Wipe Device</v-btn>
+        <br />
         <v-btn @click="resetDevice()" color="primary" large block>Reset Device</v-btn>
         <br />
         <v-select
@@ -48,6 +50,12 @@ export default {
     d_request: ''
   }),
   methods: {
+    async wipeDevice() {
+      const proto = {}
+      const result = await this.$usb.cmd('WipeDevice', proto)
+      this.d_request = `abckey.cmd("WipeDevice", ` + JSON.stringify(proto, null, 4) + ')'
+      this.d_response = JSON.stringify(result, null, 4)
+    },
     async resetDevice() {
       const proto = {
         display_random: false,

@@ -24,28 +24,12 @@ const Ping = {
   component: () => import(`@/views/${__DIR__}/Ping`)
 }
 
-const WipeDevice = {
-  path: 'WipeDevice',
-  meta: {
-    title: 'Wipe Device'
-  },
-  component: () => import(`@/views/${__DIR__}/WipeDevice`)
-}
-
 const ResetDevice = {
   path: 'ResetDevice',
   meta: {
     title: 'Reset Device'
   },
   component: () => import(`@/views/${__DIR__}/ResetDevice`)
-}
-
-const BackupDevice = {
-  path: 'BackupDevice',
-  meta: {
-    title: 'Backup Device'
-  },
-  component: () => import(`@/views/${__DIR__}/BackupDevice`)
 }
 
 const RecoveryDevice = {
@@ -63,5 +47,5 @@ export default {
     title: 'Device Settings'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [ApplySettings, ChangePin, Ping, WipeDevice, ResetDevice, BackupDevice, RecoveryDevice]
+  children: [ApplySettings, ChangePin, ResetDevice, RecoveryDevice, Ping]
 }

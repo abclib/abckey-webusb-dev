@@ -2,6 +2,8 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
+        <v-btn @click="backupDevice()" color="primary" large block>Backup Device</v-btn>
+        <br />
         <v-btn @click="recoveryDevice()" color="primary" large block>Recovery Device</v-btn>
         <br />
         <v-btn @click="checkSeed()" color="success" large block>Check Seed</v-btn>
@@ -38,6 +40,12 @@ export default {
     d_request: ''
   }),
   methods: {
+    async backupDevice() {
+      const proto = {}
+      const result = await this.$usb.cmd('BackupDevice', proto)
+      this.d_request = `abckey.cmd("BackupDevice", ` + JSON.stringify(proto, null, 4) + ')'
+      this.d_response = JSON.stringify(result, null, 4)
+    },
     async recoveryDevice() {
       const proto = {
         word_count: this.d_wordCount,
