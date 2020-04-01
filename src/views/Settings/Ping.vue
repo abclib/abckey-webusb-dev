@@ -4,11 +4,11 @@
       <v-col cols="2">
         <v-btn @click="initialize()" color="primary" large block>Initialize</v-btn>
         <br />
-        <v-btn @click="buttonProtection()" color="primary" large block>Button Protection</v-btn>
+        <v-btn @click="buttonProtection()" color="primary" large block>Button</v-btn>
         <br />
-        <v-btn @click="pinProtection(false)" color="primary" large block>Pin Protection</v-btn>
+        <v-btn @click="pinProtection(false)" color="primary" large block>Pin</v-btn>
         <br />
-        <v-btn @click="passphraseProtection(false)" color="primary" large block>Passphrase Protectionn</v-btn>
+        <v-btn @click="passphraseProtection(false)" color="primary" large block>Passphrase</v-btn>
         <br />
         <v-row align="center">
           <v-col>
@@ -42,6 +42,14 @@ export default {
   methods: {
     initialize() {
       this.$usb.cmd('Initialize')
+    },
+    async testMsg() {
+      const proto = {
+        message: this.d_msg
+      }
+      const result = await this.$usb.cmd('Ping', proto)
+      this.d_request = `abckey.cmd("Ping", ` + JSON.stringify(proto, null, 4) + ')'
+      this.d_response = JSON.stringify(result, null, 4)
     },
     async buttonProtection() {
       const proto = {
