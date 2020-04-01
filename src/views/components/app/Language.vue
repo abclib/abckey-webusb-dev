@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    c_locale: vm => vm.$store('app.language'),
+    c_locale: vm => vm.$store.__s('app.language'),
     c_label() {
       let label = 'English'
       for (const item of this.d_languages) {
