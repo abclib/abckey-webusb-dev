@@ -10,6 +10,7 @@ function syncVuex(e: any) {
   Store.__s('usb.usbProduct', e ? e.productName : '')
   Store.__s('usb.usbSerialNumber', e ? e.serialNumber : 0)
   Store.__s('usb.label', e ? e.label : 0)
+  Store.__s('usb.msg', e ? e.data : null)
 }
 
 const webusb = new Usb({
@@ -26,8 +27,10 @@ webusb.onErr(e => {
 })
 
 webusb.onMsg(e => {
-  Store.__s('usb.msg', JSON.parse(JSON.stringify(e)))
-  syncVuex(e.data)
+  const msg = JSON.parse(JSON.stringify(e))
+  syncVuex(msg)
+  if (msg.type === 'PinMatrixRequest') Router.push({ path: `/Pin` })
+  else if (msg.type === 'PassphraseRequest') Router.push({ path: `/Passphrase` })
 })
 
 Vue.prototype.$usb = webusb
