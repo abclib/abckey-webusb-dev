@@ -7,7 +7,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text rounded @click="connect()">
+      <v-btn v-if="$route.path.indexOf('Connect') < 0" text rounded @click="connect()">
         <v-icon>mdi-plus</v-icon>
         <span>{{ $t('Connect') }}</span>
       </v-btn>

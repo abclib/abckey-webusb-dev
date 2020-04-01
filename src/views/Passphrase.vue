@@ -48,7 +48,7 @@ export default {
     async enter() {
       this.d_loading = true
       const msg = await this.$usb.cmd('PassphraseAck', { passphrase: this.d_passphrase2 })
-      if (msg.type === 'PublicKey') this.$router.push({ path: `/Account` })
+      if (msg.type === 'PublicKey') this.$router.push({ path: `/Loading` })
     },
     async cancel() {
       this.$router.push({ path: `/Loading` })
