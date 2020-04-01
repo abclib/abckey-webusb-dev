@@ -2,9 +2,9 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
-        <v-btn @click="wipeDevice()" color="error" large block>Wipe Device</v-btn>
+        <v-btn @click="wipeDevice()" color="error" large block>{{ $t('Wipe Device') }}</v-btn>
         <br />
-        <v-btn @click="resetDevice()" color="primary" large block>Reset Device</v-btn>
+        <v-btn @click="resetDevice()" color="primary" large block>{{ $t('Reset Device') }}</v-btn>
         <br />
         <v-select
           v-model="d_strength"
@@ -13,7 +13,7 @@
             { text: '18 word', value: 192 },
             { text: '24 word', value: 256 }
           ]"
-          label="Strength"
+          :label="$t('Strength')"
           hide-details
         ></v-select>
         <br />
@@ -24,17 +24,17 @@
             { text: 'Slip39_Basic', value: 1 },
             { text: 'Slip39_Advanced', value: 2 }
           ]"
-          label="backup_type"
+          :label="$t('backup_type')"
           hide-details
         ></v-select>
       </v-col>
       <!-- Request -->
       <v-col cols="5">
-        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
       </v-col>
       <!-- Response  -->
       <v-col cols="5">
-        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -71,6 +71,16 @@ export default {
       const result = await this.$usb.resetDevice(proto)
       this.d_request = `abckey.resetDevice(` + JSON.stringify(proto, null, 4) + ')'
       this.d_response = JSON.stringify(result, null, 4)
+    }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        'Wipe Device': '擦除设备',
+        'Reset Device': '重置设备',
+        Strength: '密语强度',
+        backup_type: '备份类型'
+      }
     }
   }
 }

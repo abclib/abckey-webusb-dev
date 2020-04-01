@@ -2,10 +2,10 @@
   <v-container fluid>
     <v-row>
       <v-col>
-        <v-textarea label="decode" v-model="d_decode" filled auto-grow></v-textarea>
+        <v-textarea :label="$t('decode')" v-model="d_decode" filled auto-grow></v-textarea>
       </v-col>
       <v-col>
-        <v-textarea label="encode" v-model="d_encode" filled auto-grow></v-textarea>
+        <v-textarea :label="$t('encode')" v-model="d_encode" filled auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -56,6 +56,14 @@ export default {
       }
     }
     this.d_decode = JSON.stringify(decode, null, 4)
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        decode: '解码',
+        encode: '编码'
+      }
+    }
   }
 }
 </script>

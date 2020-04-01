@@ -2,29 +2,18 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
-        <v-row>
-          <v-col cols="4">
-            <v-btn @click="userSetPublicKey()" color="primary" large block>User Set Public Key</v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea v-model="d_rsaPEM" label="RSA Public Key (PEM)"></v-textarea>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-textarea v-model="d_ecPEM" label="ECDSA Private Key (PEM)"></v-textarea>
-          </v-col>
-        </v-row>
+        <v-btn @click="userSetPublicKey()" color="primary" large block>{{ $t('User Set Public Key') }}</v-btn>
+        <br />
+        <v-textarea v-model="d_rsaPEM" :label="$t('RSA Public Key (PEM)')"></v-textarea>
+        <v-textarea v-model="d_ecPEM" :label="$t('ECDSA Private Key (PEM)')"></v-textarea>
       </v-col>
       <!-- Request -->
       <v-col cols="5">
-        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
       </v-col>
       <!-- Response  -->
       <v-col cols="5">
-        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -84,6 +73,15 @@ thsrjXg4wP/lojqdkWBhSmQAzc4Vjw==
       const result = await this.$usb.cmd('UserSetPublicKey', proto)
       this.d_request = `abckey.cmd("UserSetPublicKey", ` + JSON.stringify(proto, null, 4) + ')'
       this.d_response = JSON.stringify(result, null, 4)
+    }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        'User Set Public Key': '导入公钥',
+        'RSA Public Key (PEM)': 'RSA 公钥(PEM)',
+        'ECDSA Private Key (PEM)': 'ECDSA 私钥(PEM)'
+      }
     }
   }
 }

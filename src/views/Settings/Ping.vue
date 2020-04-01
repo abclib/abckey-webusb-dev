@@ -2,30 +2,30 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
-        <v-btn @click="initialize()" color="primary" large block>Initialize</v-btn>
+        <v-btn @click="initialize()" color="primary" large block>{{ $t('Initialize') }}</v-btn>
         <br />
-        <v-btn @click="buttonProtection()" color="primary" large block>Button</v-btn>
+        <v-btn @click="buttonProtection()" color="primary" large block>{{ $t('Button') }}</v-btn>
         <br />
-        <v-btn @click="pinProtection(false)" color="primary" large block>Pin</v-btn>
+        <v-btn @click="passphraseProtection()" color="primary" large block>{{ $t('Passphrase') }}</v-btn>
         <br />
-        <v-btn @click="passphraseProtection(false)" color="primary" large block>Passphrase</v-btn>
+        <v-btn @click="pinProtection()" color="primary" large block>{{ $t('Pin') }}</v-btn>
         <br />
         <v-row align="center">
           <v-col>
-            <v-text-field v-model="d_msg" label="msg" hide-details />
+            <v-text-field v-model="d_msg" :label="$t('msg')" hide-details />
           </v-col>
           <v-col>
-            <v-btn @click="testMsg()" color="primary" large block>Test Msg</v-btn>
+            <v-btn @click="testMsg()" color="primary" large block>{{ $t('Test Msg') }}</v-btn>
           </v-col>
         </v-row>
       </v-col>
       <!-- Request -->
       <v-col cols="5">
-        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
       </v-col>
       <!-- Response  -->
       <v-col cols="5">
-        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -74,6 +74,18 @@ export default {
       const result = await this.$usb.cmd('Ping', proto)
       this.d_request = `abckey.cmd("Ping", ` + JSON.stringify(proto, null, 4) + ')'
       this.d_response = JSON.stringify(result, null, 4)
+    }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        Initialize: '复位',
+        Button: '按键',
+        Passphrase: '密码',
+        Pin: 'PIN',
+        'Test Msg': '通信',
+        msg: '消息'
+      }
     }
   }
 }

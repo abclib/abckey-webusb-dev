@@ -12,9 +12,7 @@
         <v-text-field v-model="d_lockTime" label="lock_time" hide-details />
         <br />
         <v-textarea label="inputs_json" v-model="d_inputs"></v-textarea>
-        <br />
         <v-textarea label="outputs_json" v-model="d_outputs"></v-textarea>
-        <br />
         <v-textarea label="utxo_json" v-model="d_utxo"></v-textarea>
         <br />
         <ul>

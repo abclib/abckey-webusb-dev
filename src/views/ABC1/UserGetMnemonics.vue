@@ -2,15 +2,15 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
-        <v-btn @click="userGetMnemonics()" color="primary" large block>User Get Mnemonics</v-btn>
+        <v-btn @click="userGetMnemonics()" color="primary" large block>{{ $t('User Get Mnemonics') }}</v-btn>
       </v-col>
       <!-- Request -->
       <v-col cols="5">
-        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
       </v-col>
       <!-- Response  -->
       <v-col cols="5">
-        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -30,6 +30,13 @@ export default {
       const result = await this.$usb.cmd('UserGetMnemonics', proto)
       this.d_request = `abckey.cmd("UserGetMnemonics", ` + JSON.stringify(proto, null, 4) + ')'
       this.d_response = JSON.stringify(result, null, 4)
+    }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        'User Get Mnemonics': '导出密语'
+      }
     }
   }
 }
