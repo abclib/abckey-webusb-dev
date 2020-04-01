@@ -27,6 +27,11 @@ export default {
       if (msg) this.$router.push({ path: `/Loading` })
     }
   },
+  created() {
+    if (!this.$store.__s('usb.label')) return // If the device is connected, all data will be cleared.
+    this.$usb.cmd('ClearSession', null, true)
+    window.location.reload(true)
+  },
   i18n: {
     messages: {
       zhCN: {

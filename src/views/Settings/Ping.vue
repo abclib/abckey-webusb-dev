@@ -2,6 +2,8 @@
   <v-container fluid>
     <v-row>
       <v-col cols="2">
+        <v-btn @click="initialize()" color="primary" large block>Initialize</v-btn>
+        <br />
         <v-btn @click="buttonProtection()" color="primary" large block>Button Protection</v-btn>
         <br />
         <v-btn @click="pinProtection(false)" color="primary" large block>Pin Protection</v-btn>
@@ -38,13 +40,8 @@ export default {
     d_request: ''
   }),
   methods: {
-    async testMsg() {
-      const proto = {
-        message: this.d_msg
-      }
-      const result = await this.$usb.cmd('Ping', proto)
-      this.d_request = `abckey.cmd("Ping", ` + JSON.stringify(proto, null, 4) + ')'
-      this.d_response = JSON.stringify(result, null, 4)
+    initialize() {
+      this.$usb.cmd('Initialize')
     },
     async buttonProtection() {
       const proto = {

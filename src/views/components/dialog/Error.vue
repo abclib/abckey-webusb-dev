@@ -46,11 +46,12 @@ export default {
         'Access denied.': '拒绝访问。',
         'Unpaired device.': '未配对设备。',
         'No device selected.': '未选择设备。',
-        'Device disconnected': '设备已断开',
-        'Unknown message': '未知消息。',
         'The transfer was cancelled.': '传输已取消。',
+        "Cannot read property 'requestDevice' of undefined": '您的浏览器未支持 WebUSB。',
         'Device not initialized': '设备未初始化。',
-        "Cannot read property 'requestDevice' of undefined": '您的浏览器未支持 WebUSB。'
+        'Unknown message': '未知消息。',
+        'Device disconnected': '设备已断开',
+        'Action cancelled by user': '操作已取消。'
       }
     }
   }

@@ -91,7 +91,6 @@ export default {
     },
     async removes() {
       this.$router.push('/Connect')
-      window.location.reload(true)
     }
   },
   i18n: {
