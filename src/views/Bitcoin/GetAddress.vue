@@ -3,20 +3,20 @@
     <v-row>
       <!-- Command -->
       <v-col cols="2">
-        <v-btn @click="getAddr()" color="primary" large block>Get Address</v-btn>
+        <v-btn @click="getAddr()" color="primary" large block>{{ $t('Get Address') }}</v-btn>
         <br />
-        <v-select v-model="d_coinName" :items="['Bitcoin', 'Dogecoin']" label="coin_name" hide-details></v-select>
+        <v-select v-model="d_coinName" :items="d_coinList" :label="$t('coin_name')" hide-details></v-select>
         <br />
-        <v-text-field v-model="d_path" label="path" hide-details />
+        <v-text-field v-model="d_path" :label="$t('path')" hide-details />
         <br />
         <v-select
           v-model="d_scriptType"
           :items="['SPENDADDRESS', 'SPENDMULTISIG', 'EXTERNAL', 'SPENDWITNESS', 'SPENDP2SHWITNESS']"
-          label="script_type"
+          :label="$t('script_type')"
           hide-details
         ></v-select>
         <br />
-        <v-select v-model="d_showDisplay" :items="[true, false]" label="show_display" hide-details></v-select>
+        <v-select v-model="d_showDisplay" :items="[true, false]" :label="$t('show_display')" hide-details></v-select>
         <br />
         <ul>
           <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
@@ -26,11 +26,11 @@
       </v-col>
       <!-- Request -->
       <v-col cols="5">
-        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
       </v-col>
       <!-- Response  -->
       <v-col cols="5">
-        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -40,6 +40,7 @@
 export default {
   name: 'GetAddress',
   data: () => ({
+    d_coinList: ['Bitcoin', 'Litecoin', 'Dogecoin'],
     d_coinName: 'Bitcoin',
     d_path: `m/49'/0'/0'/0/0`,
     d_scriptType: 'SPENDP2SHWITNESS',
@@ -105,6 +106,17 @@ export default {
       this.d_request = `abckey.cmd("GetAddress", ` + JSON.stringify(proto, null, 4) + ')'
       const result = await this.$usb.getAddr(proto)
       this.d_response = JSON.stringify(result, null, 4)
+    }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        'Get Address': '获取地址',
+        coin_name: '币名',
+        path: '路径',
+        script_type: '类型',
+        show_display: '显示'
+      }
     }
   }
 }

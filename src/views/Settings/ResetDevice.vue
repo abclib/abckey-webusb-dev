@@ -79,7 +79,7 @@ export default {
         'Wipe Device': '擦除设备',
         'Reset Device': '重置设备',
         Strength: '密语强度',
-        backup_type: '备份类型'
+        backup_type: '密语类型'
       }
     }
   }

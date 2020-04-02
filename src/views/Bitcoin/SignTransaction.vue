@@ -3,17 +3,17 @@
     <v-row>
       <!-- Command -->
       <v-col cols="2">
-        <v-btn @click="signTx()" color="primary" large block>Sign Transaction</v-btn>
+        <v-btn @click="signTx()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
         <br />
-        <v-select v-model="d_coinName" :items="d_coinList" label="coin_name" hide-details></v-select>
+        <v-select v-model="d_coinName" :items="d_coinList" :label="$t('coin_name')" hide-details></v-select>
         <br />
-        <v-text-field v-model="d_version" label="version" hide-details />
+        <v-text-field v-model="d_version" :label="$t('version')" hide-details />
         <br />
-        <v-text-field v-model="d_lockTime" label="lock_time" hide-details />
+        <v-text-field v-model="d_lockTime" :label="$t('lock_time')" hide-details />
         <br />
-        <v-textarea label="inputs_json" v-model="d_inputs"></v-textarea>
-        <v-textarea label="outputs_json" v-model="d_outputs"></v-textarea>
-        <v-textarea label="utxo_json" v-model="d_utxo"></v-textarea>
+        <v-textarea :label="$t('inputs_json')" v-model="d_inputs"></v-textarea>
+        <v-textarea :label="$t('outputs_json')" v-model="d_outputs"></v-textarea>
+        <v-textarea :label="$t('utxo_json')" v-model="d_utxo"></v-textarea>
         <br />
         <ul>
           <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
@@ -24,11 +24,11 @@
 
       <!-- Request -->
       <v-col cols="5">
-        <v-textarea label="Request" :value="d_request" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
       </v-col>
       <!-- Response  -->
       <v-col cols="5">
-        <v-textarea label="Response" :value="d_response" filled readonly auto-grow></v-textarea>
+        <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
   </v-container>
@@ -132,13 +132,26 @@ export default {
         coin_name: this.d_coinName,
         inputs: JSON.parse(this.d_inputs),
         outputs: JSON.parse(this.d_outputs),
-        utxo: JSON.parse(this.d_utxo),
+        utxo: this.d_utxo !== '' ? JSON.parse(this.d_utxo) : undefined,
         version: this.d_version,
         lock_time: this.d_lockTime
       }
       this.d_request = `abckey.signTx(` + JSON.stringify(proto, null, 4) + ')'
       const result = await this.$usb.signTx(proto)
       this.d_response = JSON.stringify(result, null, 4)
+    }
+  },
+  i18n: {
+    messages: {
+      zhCN: {
+        'Sign Transaction': '签名交易',
+        coin_name: '币名',
+        version: '版本',
+        lock_time: '锁定时间',
+        inputs_json: '输入',
+        outputs_json: '输出',
+        utxo_json: '零钱'
+      }
     }
   }
 }
