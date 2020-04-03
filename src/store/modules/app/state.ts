@@ -1,18 +1,6 @@
 export default {
   language: '',
-  coins: [
-    {
-      text: 'BTC',
-      value: 'Bitcoin'
-    },
-    {
-      text: 'LTC',
-      value: 'Litecoin'
-    },
-    {
-      text: 'DOGE',
-      value: 'Dogecoin'
-    }
-  ],
-  currency: ['USD', 'CNY']
+  coinName: ['Bitcoin', 'Litecoin', 'Dogecoin'],
+  coinAbbr: ['BTC', 'LTC', 'DOGE'],
+  cash: ['USD', 'CNY']
 }

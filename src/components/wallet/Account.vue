@@ -130,8 +130,9 @@
         </v-col>
       </v-row>
     </v-card>
+
     <v-expansion-panels :value="0" class="mt-3">
-      <v-expansion-panel readonly v-show="d_txs.length === 0">
+      <v-expansion-panel v-if="d_txs.length === 0" readonly>
         <v-expansion-panel-header expand-icon="">
           <span>
             <v-btn @click="upBalance()" text>
@@ -143,45 +144,43 @@
       </v-expansion-panel>
       <v-expansion-panel v-for="(item, i) in d_txs" :key="i">
         <v-expansion-panel-header>
-          <span>
-            <v-row align="center" no-gutters>
-              <v-col cols="4">
-                <span class="caption grey--text">{{ unix2utc(item.blockTime) }}</span>
-              </v-col>
-              <v-col cols="4">
-                <v-tooltip :disabled="!item.valueChanged" top>
-                  <template v-slot:activator="{ on }">
-                    <v-chip v-on="on" :color="item.valueChanged < 0 ? 'red' : 'green'" small label outlined>
-                      <v-icon left size="18">{{ item.valueChanged > 0 ? 'mdi-plus' : 'mdi-minus' }}</v-icon>
-                      <span>{{ btc2str(Math.abs(item.valueChanged)) }}</span>
-                      <span class="text-uppercase caption ml-1">{{ coin }}</span>
-                    </v-chip>
-                  </template>
-                  <span>
-                    <span>{{ item.valueChanged > 0 ? $t('Received') : $t('Spent') }}</span>
-                    <b>&nbsp;{{ btc2cash(Math.abs(item.valueChanged), d_rate) }}</b>
-                    <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
-                  </span>
-                </v-tooltip>
-              </v-col>
-              <v-col cols="4">
-                <v-tooltip :disabled="!item.value" top>
-                  <template v-slot:activator="{ on }">
-                    <v-chip v-on="on" small label outlined>
-                      <v-icon left color="grey" size="22">mdi-wallet-outline</v-icon>
-                      <span>{{ btc2str(item.value) }}</span>
-                      <span class="text-uppercase caption ml-1">{{ coin }}</span>
-                    </v-chip>
-                  </template>
-                  <span>
-                    <span>{{ $t('Balance') }}</span>
-                    <b>&nbsp;{{ btc2cash(item.value, d_rate) }}</b>
-                    <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
-                  </span>
-                </v-tooltip>
-              </v-col>
-            </v-row>
-          </span>
+          <v-row align="center" no-gutters>
+            <v-col cols="4">
+              <span class="caption grey--text">{{ unix2utc(item.blockTime) }}</span>
+            </v-col>
+            <v-col cols="4">
+              <v-tooltip :disabled="!item.valueChanged" top>
+                <template v-slot:activator="{ on }">
+                  <v-chip v-on="on" :color="item.valueChanged < 0 ? 'red' : 'green'" small label outlined>
+                    <v-icon left size="18">{{ item.valueChanged > 0 ? 'mdi-plus' : 'mdi-minus' }}</v-icon>
+                    <span>{{ btc2str(Math.abs(item.valueChanged)) }}</span>
+                    <span class="text-uppercase caption ml-1">{{ coin }}</span>
+                  </v-chip>
+                </template>
+                <span>
+                  <span>{{ item.valueChanged > 0 ? $t('Received') : $t('Spent') }}</span>
+                  <b>&nbsp;{{ btc2cash(Math.abs(item.valueChanged), d_rate) }}</b>
+                  <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
+                </span>
+              </v-tooltip>
+            </v-col>
+            <v-col cols="4">
+              <v-tooltip :disabled="!item.value" top>
+                <template v-slot:activator="{ on }">
+                  <v-chip v-on="on" small label outlined>
+                    <v-icon left color="grey" size="22">mdi-wallet-outline</v-icon>
+                    <span>{{ btc2str(item.value) }}</span>
+                    <span class="text-uppercase caption ml-1">{{ coin }}</span>
+                  </v-chip>
+                </template>
+                <span>
+                  <span>{{ $t('Balance') }}</span>
+                  <b>&nbsp;{{ btc2cash(item.value, d_rate) }}</b>
+                  <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
+                </span>
+              </v-tooltip>
+            </v-col>
+          </v-row>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-simple-table dense>
@@ -299,6 +298,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+
     <p class="mt-3 mb-7 grey--text text-center">
       <span class="caption">
         {{ $t('Only the latest 1000 data is displayed.') }}

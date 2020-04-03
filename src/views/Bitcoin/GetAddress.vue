@@ -49,7 +49,7 @@ export default {
     d_request: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.coins'),
+    c_coins: vm => vm.$store.__s('app.coinName'),
     c_addressN() {
       const address_n = []
       const path = this.d_path.match(/\/[0-9]+('|H)?/g)
