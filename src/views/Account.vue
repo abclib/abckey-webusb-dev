@@ -23,7 +23,7 @@
 export default {
   name: 'Account',
   data: () => ({
-    d_coin: 'BTC',
+    d_coin: 'Bitcoin',
     d_cash: 'USD',
     d_xpub: ''
   }),
