@@ -2,12 +2,18 @@
   <v-container class="fill-height mt-7">
     <v-layout class="d-flex justify-center">
       <div class="account">
-        <wallet-account
-          name="bitcoin"
-          symbol="btc"
-          currency="usd"
-          xpub="ypub6X8sy1kK2MTcg8149iBYFKd9bfoLeLt1MnxQF7BzqWVqez2BVb7pRLVoiRENduwp2vJmMFnXruYQ8xc3XRgLrGToTtkMEC51yw8yeVtY5jR"
-        ></wallet-account>
+        <v-row>
+          <v-col cols="2">
+            <v-select v-model="d_coin" :items="c_coins" :label="$t('coin')" solo dense></v-select>
+          </v-col>
+          <v-col cols="2">
+            <v-select v-model="d_cash" :items="c_currency" :label="$t('cash')" solo dense></v-select>
+          </v-col>
+          <v-col cols="8">
+            <v-text-field v-model="d_xpub" label="xpub" solo dense></v-text-field>
+          </v-col>
+        </v-row>
+        <wallet-account :coin="d_coin" :cash="d_cash" :xpub="d_xpub"></wallet-account>
       </div>
     </v-layout>
   </v-container>
@@ -16,8 +22,15 @@
 <script>
 export default {
   name: 'Account',
-  data: () => ({}),
-  computed: {},
+  data: () => ({
+    d_coin: 'BTC',
+    d_cash: 'USD',
+    d_xpub: ''
+  }),
+  computed: {
+    c_coins: vm => vm.$store.__s('app.coins'),
+    c_currency: vm => vm.$store.__s('app.currency')
+  },
   methods: {}
 }
 </script>

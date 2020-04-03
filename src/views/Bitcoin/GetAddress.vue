@@ -5,7 +5,7 @@
       <v-col cols="2">
         <v-btn @click="getAddr()" color="primary" large block>{{ $t('Get Address') }}</v-btn>
         <br />
-        <v-select v-model="d_coinName" :items="d_coinList" :label="$t('coin_name')" hide-details></v-select>
+        <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')" hide-details></v-select>
         <br />
         <v-text-field v-model="d_path" :label="$t('path')" hide-details />
         <br />
@@ -40,7 +40,6 @@
 export default {
   name: 'GetAddress',
   data: () => ({
-    d_coinList: ['Bitcoin', 'Litecoin', 'Dogecoin'],
     d_coinName: 'Bitcoin',
     d_path: `m/49'/0'/0'/0/0`,
     d_scriptType: 'SPENDP2SHWITNESS',
@@ -50,6 +49,7 @@ export default {
     d_request: ''
   }),
   computed: {
+    c_coins: vm => vm.$store.__s('app.coins'),
     c_addressN() {
       const address_n = []
       const path = this.d_path.match(/\/[0-9]+('|H)?/g)

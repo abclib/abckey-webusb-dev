@@ -9,7 +9,7 @@
           </v-btn>
           <div :class="['mt-1', d_loading.upBalance && 'blur']">
             <span class="title font-weight-bold">{{ btc2str(d_balance) }}</span>
-            <span class="text-uppercase caption">&nbsp;{{ symbol }}</span>
+            <span class="text-uppercase caption">&nbsp;{{ coin }}</span>
           </div>
         </v-col>
         <v-col class="text-center">
@@ -19,7 +19,7 @@
           </v-btn>
           <div :class="['mt-1', (d_loading.upBalance || d_loading.upRate) && 'blur']">
             <span class="title font-weight-bold">{{ btc2cash(d_balance, d_rate) }}</span>
-            <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+            <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
           </div>
         </v-col>
         <v-col class="text-center">
@@ -29,7 +29,7 @@
           </v-btn>
           <div :class="['mt-1', d_loading.upRate && 'blur']">
             <span class="title font-weight-bold">{{ cash2str(d_rate) }}</span>
-            <span class="text-uppercase caption">&nbsp;{{ currency }}/{{ symbol }}</span>
+            <span class="text-uppercase caption">&nbsp;{{ cash }}/{{ coin }}</span>
           </div>
         </v-col>
       </v-row>
@@ -48,12 +48,12 @@
                       <template v-slot:activator="{ on }">
                         <span v-on="on" :class="[d_loading.upBalance && 'blur']">
                           <b>{{ btc2str(d_totalReceived) }}</b>
-                          <span class="text-uppercase caption grey--text">&nbsp;{{ symbol }}</span>
+                          <span class="text-uppercase caption grey--text">&nbsp;{{ coin }}</span>
                         </span>
                       </template>
                       <span>
                         <b>{{ btc2cash(d_totalReceived, d_rate) }}</b>
-                        <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                        <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                       </span>
                     </v-tooltip>
                   </td>
@@ -73,12 +73,12 @@
                       <template v-slot:activator="{ on }">
                         <span v-on="on" :class="[d_loading.upBalance && 'blur']">
                           <b>{{ btc2str(d_unconfirmedBalance) }}</b>
-                          <span class="text-uppercase caption grey--text">&nbsp;{{ symbol }}</span>
+                          <span class="text-uppercase caption grey--text">&nbsp;{{ coin }}</span>
                         </span>
                       </template>
                       <span>
                         <b>{{ btc2cash(d_unconfirmedBalance, d_rate) }}</b>
-                        <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                        <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                       </span>
                     </v-tooltip>
                   </td>
@@ -98,12 +98,12 @@
                       <template v-slot:activator="{ on }">
                         <span v-on="on" :class="[d_loading.upBalance && 'blur']">
                           <b>{{ btc2str(d_totalSent) }}</b>
-                          <span class="text-uppercase caption grey--text">&nbsp;{{ symbol }}</span>
+                          <span class="text-uppercase caption grey--text">&nbsp;{{ coin }}</span>
                         </span>
                       </template>
                       <span>
                         <b>{{ btc2cash(d_totalSent, d_rate) }}</b>
-                        <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                        <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                       </span>
                     </v-tooltip>
                   </td>
@@ -154,13 +154,13 @@
                     <v-chip v-on="on" :color="item.valueChanged < 0 ? 'red' : 'green'" small label outlined>
                       <v-icon left size="18">{{ item.valueChanged > 0 ? 'mdi-plus' : 'mdi-minus' }}</v-icon>
                       <span>{{ btc2str(Math.abs(item.valueChanged)) }}</span>
-                      <span class="text-uppercase caption ml-1">{{ symbol }}</span>
+                      <span class="text-uppercase caption ml-1">{{ coin }}</span>
                     </v-chip>
                   </template>
                   <span>
                     <span>{{ item.valueChanged > 0 ? $t('Received') : $t('Spent') }}</span>
                     <b>&nbsp;{{ btc2cash(Math.abs(item.valueChanged), d_rate) }}</b>
-                    <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                    <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                   </span>
                 </v-tooltip>
               </v-col>
@@ -170,13 +170,13 @@
                     <v-chip v-on="on" small label outlined>
                       <v-icon left color="grey" size="22">mdi-wallet-outline</v-icon>
                       <span>{{ btc2str(item.value) }}</span>
-                      <span class="text-uppercase caption ml-1">{{ symbol }}</span>
+                      <span class="text-uppercase caption ml-1">{{ coin }}</span>
                     </v-chip>
                   </template>
                   <span>
                     <span>{{ $t('Balance') }}</span>
                     <b>&nbsp;{{ btc2cash(item.value, d_rate) }}</b>
-                    <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                    <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                   </span>
                 </v-tooltip>
               </v-col>
@@ -217,12 +217,12 @@
                       <template v-slot:activator="{ on }">
                         <span v-on="on">
                           <span>{{ btc2str(item.fees) }}</span>
-                          <span class="text-uppercase caption">&nbsp;{{ symbol }}</span>
+                          <span class="text-uppercase caption">&nbsp;{{ coin }}</span>
                         </span>
                       </template>
                       <span>
                         <b>{{ btc2cash(item.fees, d_rate) }}</b>
-                        <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                        <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                       </span>
                     </v-tooltip>
                   </td>
@@ -251,10 +251,10 @@
                           </template>
                           <span>
                             <b>{{ item.value }}</b>
-                            <span class="text-uppercase caption">&nbsp;{{ symbol }}</span>
+                            <span class="text-uppercase caption">&nbsp;{{ coin }}</span>
                             <span>&nbsp;≈&nbsp;</span>
                             <b>{{ btc2cash(item.value, d_rate) }}</b>
-                            <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                            <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                           </span>
                         </v-tooltip>
                       </td>
@@ -283,10 +283,10 @@
                           </template>
                           <span>
                             <b>{{ item.value }}</b>
-                            <span class="text-uppercase caption">&nbsp;{{ symbol }}</span>
+                            <span class="text-uppercase caption">&nbsp;{{ coin }}</span>
                             <span>&nbsp;≈&nbsp;</span>
                             <b>{{ btc2cash(item.value, d_rate) }}</b>
-                            <span class="text-uppercase caption">&nbsp;{{ currency }}</span>
+                            <span class="text-uppercase caption">&nbsp;{{ cash }}</span>
                           </span>
                         </v-tooltip>
                       </td>
@@ -302,7 +302,7 @@
     <p class="mt-3 mb-7 grey--text text-center">
       <span class="caption">
         {{ $t('Only the latest 1000 data is displayed.') }}
-        <a :href="`https://blockchair.com/${name}/xpub/${xpub}`" target="_blank">{{ $t('See more') }}</a>
+        <a :href="`https://blockchair.com/${coin}/xpub/${xpub}`" target="_blank">{{ $t('See more') }}</a>
       </span>
     </p>
   </v-container>
@@ -314,15 +314,11 @@ import BN from 'bignumber.js'
 
 export default {
   props: {
-    name: {
-      default: 'bitcoin',
-      type: String
-    },
-    symbol: {
+    coin: {
       default: 'btc',
       type: String
     },
-    currency: {
+    cash: {
       default: 'usd',
       type: String
     },
@@ -347,8 +343,15 @@ export default {
     }
   }),
   watch: {
-    ['d_upBalance.page'](val) {
-      this.upBalance(val)
+    coin() {
+      this.upAll()
+    },
+    cash() {
+      this.upAll()
+    },
+    xpub(val) {
+      if (!val) return
+      this.upAll()
     }
   },
   async created() {
@@ -366,7 +369,8 @@ export default {
     },
     async upBalance() {
       this.d_loading.upBalance = true
-      const { data } = await Axios.get(`https://api.abckey.com/${this.symbol}/xpub/${this.xpub}?details=txs&tokens=used&t=${new Date().getTime()}`)
+      const { data } = await Axios.get(`https://api.abckey.com/${this.coin.toLowerCase()}/xpub/${this.xpub}?details=txs&tokens=used&t=${new Date().getTime()}`)
+      if (data.error) return
       this.d_balance = this.sat2btc(data.balance)
       this.d_totalReceived = this.sat2btc(data.totalReceived)
       this.d_totalSent = this.sat2btc(data.totalSent)
@@ -379,18 +383,18 @@ export default {
     },
     async upRate() {
       this.d_loading.upRate = true
-      const { data } = await Axios.get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${this.name}&vs_currencies=${this.currency}&t=${new Date().getTime()}`
-      )
-      this.d_rate = data[this.name][this.currency]
+      const { data } = await Axios.get(`https://api.abckey.com/market/${this.coin.toLowerCase()}/${this.cash.toLowerCase()}&t=${new Date().getTime()}`)
+      if (data.error) return
+      this.d_rate = data
       this.d_loading.upRate = false
     },
     sat2btc: sat => BN(sat).div(100000000).toNumber(),
     btc2str: btc => BN(btc).dp(8, 1).toFormat(),
-    cash2str: num => BN(num).dp(2, 1).toFormat(2, 1),
+    cash2str: num => BN(num).dp(8, 1).toFormat(),
     btc2cash: (sat, rate) => BN(sat).times(rate).dp(2, 1).toFormat(),
     unix2utc: time => new Date(time * 1000).toJSON().substr(0, 19).replace('T', ' '),
     _fixTxs(txs, tokens) {
+      if (!txs) return
       for (let i = 0; i < txs.length; i++) {
         const oldValue = i + 1 === txs.length ? 0 : txs[i + 1].value
         txs[i].valueChanged = this.sat2btc(txs[i].value - oldValue)

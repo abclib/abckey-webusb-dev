@@ -5,7 +5,7 @@
       <v-col cols="2">
         <v-btn @click="getPbk()" color="primary" large block>{{ $t('Get Public Key') }}</v-btn>
         <br />
-        <v-select v-model="d_coinName" :items="d_coinList" :label="$t('coin_name')" hide-details></v-select>
+        <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')" hide-details></v-select>
         <br />
         <v-text-field v-model="d_path" :label="$t('path')" hide-details />
         <br />
@@ -40,7 +40,6 @@
 export default {
   name: 'GetPublicKey',
   data: () => ({
-    d_coinList: ['Bitcoin', 'Litecoin', 'Dogecoin'],
     d_coinName: 'Bitcoin',
     d_path: `m/49'/0'/0'`,
     d_scriptType: 'SPENDP2SHWITNESS',
@@ -48,6 +47,19 @@ export default {
     d_response: '',
     d_request: ''
   }),
+  computed: {
+    c_coins: vm => vm.$store.__s('app.coins'),
+    c_addressN() {
+      const address_n = []
+      const path = this.d_path.match(/\/[0-9]+('|H)?/g)
+      for (const item of path) {
+        let id = parseInt(item.match(/[0-9]+/g)[0])
+        if (item.match(/('|H)/g)) id = (id | 0x80000000) >>> 0
+        address_n.push(id)
+      }
+      return address_n
+    }
+  },
   watch: {
     d_scriptType(val) {
       if (val === 'SPENDMULTISIG') this.d_path = `m/45'/0`
@@ -60,18 +72,6 @@ export default {
         this.d_path = `m/44'/0'/0'`
         this.d_scriptType = 'SPENDADDRESS'
       }
-    }
-  },
-  computed: {
-    c_addressN() {
-      const address_n = []
-      const path = this.d_path.match(/\/[0-9]+('|H)?/g)
-      for (const item of path) {
-        let id = parseInt(item.match(/[0-9]+/g)[0])
-        if (item.match(/('|H)/g)) id = (id | 0x80000000) >>> 0
-        address_n.push(id)
-      }
-      return address_n
     }
   },
   methods: {
