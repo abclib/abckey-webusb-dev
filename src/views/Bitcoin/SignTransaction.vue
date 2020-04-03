@@ -5,7 +5,7 @@
       <v-col cols="2">
         <v-btn @click="signTx()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
         <br />
-        <v-select v-model="d_coinName" :items="d_coinList" :label="$t('coin_name')" hide-details></v-select>
+        <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')" hide-details></v-select>
         <br />
         <v-text-field v-model="d_version" :label="$t('version')" hide-details />
         <br />
@@ -38,7 +38,6 @@
 export default {
   name: 'home',
   data: () => ({
-    d_coinList: ['Bitcoin', 'Litecoin'],
     d_coinName: 'Bitcoin',
     d_version: 1,
     d_lockTime: 0,
@@ -48,6 +47,9 @@ export default {
     d_request: '',
     d_response: ''
   }),
+  computed: {
+    c_coins: vm => vm.$store.__s('app.coinName')
+  },
   mounted() {
     const inputs = [
       {
