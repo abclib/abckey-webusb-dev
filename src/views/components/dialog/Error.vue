@@ -51,7 +51,8 @@ export default {
         'Device not initialized': '设备未初始化。',
         'Unknown message': '未知消息。',
         'Device disconnected': '设备已断开',
-        'Action cancelled by user': '操作已取消。'
+        'Action cancelled by user': '操作已取消。',
+        'Device is already initialized. Use Wipe first.': '设备已初始化。'
       }
     }
   }
