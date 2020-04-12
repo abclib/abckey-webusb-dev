@@ -31,6 +31,9 @@ export default {
       if (!err) return
       this.d_show = true
       this.d_msg = err.message
+      if (this.$route.path === '/Loading' || this.$route.path === '/Pin' || this.$route.path === '/Passphrase') {
+        this.$router.push('/Connect')
+      }
     }
   },
   methods: {
