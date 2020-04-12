@@ -1,5 +1,13 @@
 const __DIR__ = 'Bitcoin'
 
+const Account = {
+  path: 'Account',
+  meta: {
+    title: 'Account'
+  },
+  component: () => import(`@/views/${__DIR__}/Account`)
+}
+
 const GetPublicKey = {
   path: 'GetPublicKey',
   meta: {
@@ -32,5 +40,5 @@ export default {
     title: 'Bitcoin'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [GetPublicKey, GetAddress, SignTransaction]
+  children: [Account, GetPublicKey, GetAddress, SignTransaction]
 }
