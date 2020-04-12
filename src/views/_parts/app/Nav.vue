@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar dense clipped-right app>
-      <v-app-bar-nav-icon @click="d_drawerMini = !d_drawerMini"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="d_drawerShow = !d_drawerShow"></v-app-bar-nav-icon>
 
       <v-toolbar-title v-text="$route.path"></v-toolbar-title>
 

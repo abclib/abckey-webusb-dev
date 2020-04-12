@@ -36,7 +36,7 @@ export default {
         show_display: false
       }
       const msg = await this.$usb.cmd('GetPublicKey', proto)
-      if (msg.type === 'PublicKey') this.$router.push({ path: `/Account` })
+      if (msg.type === 'PublicKey') this.$router.push({ path: `/Bitcoin/Account` })
       else if (msg.type === 'Failure') this.$router.push({ path: `/Connect` })
     }
   },
