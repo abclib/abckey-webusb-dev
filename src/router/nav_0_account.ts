@@ -8,6 +8,14 @@ const Bitcoin = {
   component: () => import(`@/views/${__DIR__}/Bitcoin`)
 }
 
+const Ethereum = {
+  path: 'Ethereum',
+  meta: {
+    title: 'Ethereum'
+  },
+  component: () => import(`@/views/${__DIR__}/Ethereum`)
+}
+
 export default {
   path: `/${__DIR__}`,
   redirect: `/${__DIR__}/Bitcoin`,
@@ -16,5 +24,5 @@ export default {
     title: 'Account'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Bitcoin]
+  children: [Bitcoin, Ethereum]
 }

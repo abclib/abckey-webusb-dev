@@ -6,6 +6,7 @@ export default {
     Passphrase: '密码',
     Account: '账户',
     Bitcoin: '比特币',
+    Ethereum: '以太坊',
     'Device Settings': '设备选项',
     'ABC1 Extension': 'ABC1 扩展',
     'Get Public Key': '获取公钥',
