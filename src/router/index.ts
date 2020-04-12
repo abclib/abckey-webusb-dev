@@ -60,14 +60,6 @@ const routes: Array<RouteConfig> = [
     },
     component: () => import(/* webpackChunkName: "Passphrase" */ '@/views/Passphrase.vue')
   },
-  {
-    path: '/Account',
-    meta: {
-      icon: 'mdi-wallet',
-      title: 'Account'
-    },
-    component: () => import(/* webpackChunkName: "Account" */ '@/views/Account.vue')
-  },
   ...modules
 ]
 
