@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import btnLanguage from '@/views/components/app/Language'
+import btnLanguage from './Language'
 
 export default {
   components: {

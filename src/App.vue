@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import appNav from '@/views/components/app/Nav'
-import appFooter from '@/views/components/app/Footer'
-import dialogError from '@/views/components/dialog/Error'
-import dialogButtonAck from '@/views/components/dialog/ButtonAck'
+import appNav from '@/views/_parts/app/Nav'
+import appFooter from '@/views/_parts/app/Footer'
+import dialogError from '@/views/_parts/dialog/Error'
+import dialogButtonAck from '@/views/_parts/dialog/ButtonAck'
 
 export default {
   name: 'App',

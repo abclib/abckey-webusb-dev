@@ -38,7 +38,7 @@
       </v-menu>
     </v-app-bar>
     <!-- navigation-drawer -->
-    <v-navigation-drawer :mini-variant="d_drawerMini" :expand-on-hover="d_drawerMini" permanent app>
+    <v-navigation-drawer v-model="d_drawerShow" app>
       <v-list dense nav>
         <span v-for="nav in this.$router.options.routes" :key="nav.path">
           <v-list-item v-if="nav.meta && !nav.children" :to="nav.path">
@@ -74,7 +74,7 @@
 <script>
 export default {
   data: () => ({
-    d_drawerMini: true
+    d_drawerShow: true
   }),
   computed: {
     c_label: vm => vm.$store.__s('usb.label')
