@@ -36,6 +36,14 @@ const routes: Array<RouteConfig> = [
     },
     component: () => import(/* webpackChunkName: "Loading" */ '@/views/Loading.vue')
   },
+  // {
+  //   path: '/Bootloader',
+  //   meta: {
+  //     icon: 'mdi-progress-wrench',
+  //     title: 'Bootloader'
+  //   },
+  //   component: () => import(/* webpackChunkName: "Bootloader" */ '@/views/Bootloader.vue')
+  // },
   {
     path: '/Pin',
     meta: {
