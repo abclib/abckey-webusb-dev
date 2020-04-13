@@ -12,7 +12,7 @@
               :items="['SPENDADDRESS', 'SPENDMULTISIG', 'EXTERNAL', 'SPENDWITNESS', 'SPENDP2SHWITNESS']"
               :label="$t('script_type')"
             ></v-select>
-            <v-text-field v-model="d_bip44Path" :label="$t('path')" />
+            <v-text-field v-model="d_bip44Path" :label="$t('bip44_path')" />
             <v-select v-model="d_showDisplay" :items="[true, false]" :label="$t('show_display')"></v-select>
             <ul>
               <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" target="_blank">bip-0032.mediawiki</a></li>
@@ -44,7 +44,7 @@ export default {
     d_request: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.bitcoinLike')
+    c_coins: vm => vm.$store.__s('app.asBTC')
   },
   watch: {
     d_scriptType(val) {
@@ -90,8 +90,8 @@ export default {
         show_display: this.d_showDisplay,
         multisig: this.d_scriptType === 'SPENDMULTISIG' ? JSON.parse(this.d_multisig) : undefined
       }
-      this.d_request = `abckey.getAddress(` + JSON.stringify(proto, null, 4) + ')'
-      const result = await this.$usb.getAddress(proto)
+      this.d_request = `abckey.cmd('GetAddress', ` + JSON.stringify(proto, null, 4) + ')'
+      const result = await this.$usb.cmd('GetAddress', proto)
       this.d_response = JSON.stringify(result, null, 4)
     }
   },
@@ -100,7 +100,7 @@ export default {
       zhCN: {
         'Get Address': '获取地址',
         coin_name: '币名',
-        path: '路径',
+        bip44_path: '路径',
         script_type: '类型',
         show_display: '显示'
       }

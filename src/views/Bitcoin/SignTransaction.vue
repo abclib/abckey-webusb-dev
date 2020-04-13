@@ -3,7 +3,7 @@
     <v-row>
       <!-- Command -->
       <v-col cols="2">
-        <v-btn @click="signTx()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
+        <v-btn @click="signBTC()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
         <br />
         <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')" hide-details></v-select>
         <br />
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: 'home',
+  name: 'SignTransaction',
   data: () => ({
     d_coinName: 'Bitcoin',
     d_version: 1,
@@ -48,7 +48,7 @@ export default {
     d_response: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.coinName')
+    c_coins: vm => vm.$store.__s('app.asBTC')
   },
   mounted() {
     const inputs = [
@@ -129,7 +129,7 @@ export default {
     this.d_utxo = JSON.stringify(utxo, null, 4)
   },
   methods: {
-    async signTx() {
+    async signBTC() {
       const proto = {
         coin_name: this.d_coinName,
         inputs: JSON.parse(this.d_inputs),
@@ -138,8 +138,8 @@ export default {
         version: this.d_version,
         lock_time: this.d_lockTime
       }
-      this.d_request = `abckey.signTx(` + JSON.stringify(proto, null, 4) + ')'
-      const result = await this.$usb.signTx(proto)
+      this.d_request = `abckey.signBTC(` + JSON.stringify(proto, null, 4) + ')'
+      const result = await this.$usb.signBTC(proto)
       this.d_response = JSON.stringify(result, null, 4)
     }
   },

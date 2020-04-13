@@ -12,7 +12,7 @@
               :items="['SPENDADDRESS', 'SPENDMULTISIG', 'EXTERNAL', 'SPENDWITNESS', 'SPENDP2SHWITNESS']"
               :label="$t('script_type')"
             ></v-select>
-            <v-text-field v-model="d_bip44Path" :label="$t('path')" />
+            <v-text-field v-model="d_bip44Path" :label="$t('bip44_path')" />
             <v-select v-model="d_showDisplay" :items="[true, false]" :label="$t('show_display')"></v-select>
             <ul>
               <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" target="_blank">bip-0032.mediawiki</a></li>
@@ -43,7 +43,7 @@ export default {
     d_request: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.bitcoinLike')
+    c_coins: vm => vm.$store.__s('app.asBTC')
   },
   watch: {
     d_scriptType(val) {
@@ -69,8 +69,8 @@ export default {
         script_type: this.d_scriptType,
         show_display: this.d_showDisplay
       }
-      this.d_request = `abckey.getPublicKey(` + JSON.stringify(proto, null, 4) + ')'
-      const result = await this.$usb.getPublicKey(proto)
+      this.d_request = `abckey.cmd('GetPublicKey', ` + JSON.stringify(proto, null, 4) + ')'
+      const result = await this.$usb.cmd('GetPublicKey', proto)
       result.data.node.chain_code = Buffer.from(result.data.node.chain_code, 'base64').toString('hex') // bytes as base64 encoded strings
       result.data.node.public_key = Buffer.from(result.data.node.public_key, 'base64').toString('hex') // bytes as base64 encoded strings
       this.d_response = JSON.stringify(result, null, 4)
@@ -81,7 +81,7 @@ export default {
       zhCN: {
         'Get Public Key': '获取公钥',
         coin_name: '币名',
-        path: '路径',
+        bip44_path: '路径',
         script_type: '类型',
         show_display: '显示'
       }
