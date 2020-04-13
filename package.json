@@ -1,13 +1,13 @@
 {
   "name": "@abckey/webusb-dev",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@abckey/webusb": "0.0.25",
+    "@abckey/webusb": "0.1.2",
     "@babel/polyfill": "^7.4.4",
     "@trust/keyto": "^1.0.1",
     "axios": "^0.19.2",
