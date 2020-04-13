@@ -1,6 +1,7 @@
 export default {
   language: '',
-  coinName: ['Bitcoin', 'Litecoin', 'Dogecoin'],
+  bitcoinLike: ['Bitcoin', 'Litecoin', 'Dogecoin'],
+  ethereumLike: ['Ethereum'],
   coinAbbr: ['BTC', 'LTC', 'DOGE'],
-  cash: ['USD', 'CNY']
+  cash: ['USD ', 'CNY']
 }
