@@ -40,6 +40,14 @@ const Transaction = {
   component: () => import(`@/views/${__DIR__}/Transaction`)
 }
 
+const TransactionMultisig = {
+  path: 'TransactionMultisig',
+  meta: {
+    title: 'Transaction Multisig'
+  },
+  component: () => import(`@/views/${__DIR__}/TransactionMultisig`)
+}
+
 export default {
   path: `/${__DIR__}`,
   redirect: `/${__DIR__}/GetPublicKey`,
@@ -48,5 +56,5 @@ export default {
     title: 'Bitcoin'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Account, PublicKey, Address, AddressMultisig, Transaction]
+  children: [Account, PublicKey, Address, AddressMultisig, Transaction, TransactionMultisig]
 }

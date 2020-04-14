@@ -9,6 +9,7 @@ export default {
     Address: '地址',
     'Address Multisig': '地址多签',
     Transaction: '交易',
+    'Transaction Multisig': '交易多签',
     Bitcoin: '比特币',
     Ethereum: '以太坊',
     'Device Settings': '设备选项',

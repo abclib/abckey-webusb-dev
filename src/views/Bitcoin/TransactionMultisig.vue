@@ -27,7 +27,7 @@
 export default {
   name: 'Transaction',
   data: () => ({
-    d_coinName: 'Litecoin',
+    d_coinName: 'Bitcoin',
     d_version: 1,
     d_lockTime: 0,
     d_inputs: '',
@@ -42,42 +42,73 @@ export default {
   mounted() {
     const inputs = [
       {
-        prev_hash: 'cea52c0a28452f9dcd56f9ca013081331c399f0a36494c5caa8c371814851961',
-        prev_index: 1,
-        script_type: 'LEGACY',
-        amount: '10517778',
-        address_n: [2147483697, 2147483650, 2147483648, 1, 1],
-        sequence: 4294967295
+        bip32_path: `m/45'/0/0/0`,
+        prev_hash: 'b3e400a6ec426652f22e7cc9056388713b27040ecd6620820b4e88e422b9dbb4',
+        prev_index: 0,
+        sequence: 4294967295,
+        script_type: 'MULTISIG',
+        amount: '305170',
+        multisig: {
+          pubkeys: [
+            {
+              xpub: 'xpub6DwRZP9AGY74m2LYeAgqjThHVg6YgQVTjR8snD9JXm9TSP1bM7jXur79iZfHqAz11MDDygUpfAGJRKEngX3TM6AtESfkhSUyjA8C7foZ2Sy',
+              path: ''
+            },
+            {
+              xpub: 'xpub6EM1j8mUpjLTH3yu3m95EnadifxH9cJho9HeyK9sySpiSdEkniaJbpvwkJLQJaVZ91p1CTX2PtSD1xubAnbqUDbLL6eiAaVof38GRnfttmr',
+              path: ''
+            },
+            {
+              xpub: 'xpub6Cv91ksLxY6mP88jy3xLGhe4AgxRsSmJDD3xJbxhkEJEZRXtn4gAcQf7CAURhvWZWqYqLMT5eqSDF5TwB6oX7HEwSEYDfNHx4FD55A1Rwwi',
+              path: ''
+            },
+            {
+              xpub: 'xpub6CB1p2e5RYzJbv4UnKacXQLQyFKRz2iaXp7N1TZzcBB5kXZqrZdwpZcGkaWPN1wpmtaxQztVt27ExmmaoT7imJrmNaF1NLQUAGnCmigrBxM',
+              path: ''
+            },
+            {
+              xpub: 'xpub6Ei4K7R6Cuu4Nf1QNm2rf3C8LCHiYqrkVTAAaXWgehzK1fuKpRCwjmUv5w7KLaitC9nfXke34wna3jjZtup9HTimhiiTZoKRWhYHdfeAcUx',
+              path: ''
+            }
+          ],
+          signatures: ['', '', '', ''],
+          m: 4
+        }
       }
     ]
     const outputs = [
       {
-        amount: '10517500',
-        address: 'MPSq6gfkMTKsi6jkHNykkPKQEjt8QYMpnp',
+        address: '321m4ZKqkPfE27kXZEvfXxrroMiXeL1K9p',
+        amount: '1000',
+        script_type: 'OUT_LEGACY'
+      },
+      {
+        address: '1Dxzq1eqMmskCWYuUgkJDvTbBHr5sqG2ZY',
+        amount: '1000',
         script_type: 'OUT_LEGACY'
       }
     ]
     const utxo = [
       {
-        version: 1,
+        version: 2,
         lock_time: 0,
-        hash: 'cea52c0a28452f9dcd56f9ca013081331c399f0a36494c5caa8c371814851961',
+        hash: 'b3e400a6ec426652f22e7cc9056388713b27040ecd6620820b4e88e422b9dbb4',
         inputs: [
           {
-            prev_index: 0,
+            prev_index: 1,
             sequence: 4294967295,
-            prev_hash: '3b34fc0ee2544af113f5eef6f9bb3f761bf53200a44c11a8cd3400f2f2391512',
-            script_sig: '1600149ef635981841b59b70d48feb61bd36ea9746265b'
+            prev_hash: 'b02f47429905f7b0e2d49f6753b8314a205205c2978cc8236793b6886080c89a',
+            script_sig: '1600145718c9aee8fb71b8d2df1d878968dd5310977a98'
           }
         ],
         bin_outputs: [
           {
-            amount: '2000000',
-            script_pubkey: 'a914d707630e4914f45c2c58bd08c8c3fdc19b27f4ff87'
+            amount: '12619',
+            script_pubkey: 'a914038b7f4bd1e2305a2b72dfab094fa392fedd7f3187'
           },
           {
-            amount: '10517778',
-            script_pubkey: '76a914483bf46486b20251d050159399dbff718b4c448788ac'
+            amount: '292551',
+            script_pubkey: 'a9141191ece76da3009434dd6bd2bf8a36296e032a1987'
           }
         ]
       }
