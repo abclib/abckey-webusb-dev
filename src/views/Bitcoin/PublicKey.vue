@@ -8,7 +8,7 @@
             <br />
             <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')"></v-select>
             <v-text-field v-model="d_bip32Path" :label="$t('bip32_path')" />
-            <v-select v-model="d_scriptType" :items="['LEGACY', 'BECH32', 'P2SH_SEGWIT']" :label="$t('script_type')"></v-select>
+            <v-select v-model="d_scriptType" :items="['LEGACY', 'BECH32', 'P2SHSEGWIT']" :label="$t('script_type')"></v-select>
             <v-select v-model="d_showDisplay" :items="[true, false]" :label="$t('show_display')"></v-select>
           </v-card-text>
         </v-card>
@@ -27,7 +27,7 @@ export default {
   data: () => ({
     d_coinName: 'Bitcoin',
     d_bip32Path: `m/49'/0'/0'`,
-    d_scriptType: 'P2SH_SEGWIT',
+    d_scriptType: 'P2SHSEGWIT',
     d_showDisplay: false,
     d_response: '',
     d_request: ''
@@ -39,15 +39,15 @@ export default {
     d_scriptType(val) {
       if (val === 'LEGACY') this.d_bip32Path = `m/44'/0'/0'`
       if (val === 'BECH32') this.d_bip32Path = `m/49'/0'/0'`
-      if (val === 'P2SH_SEGWIT') this.d_bip32Path = `m/49'/0'/0'`
+      if (val === 'P2SHSEGWIT') this.d_bip32Path = `m/49'/0'/0'`
     },
     d_coinName(val) {
       if (val === 'Bitcoin') {
         this.d_bip32Path = `m/49'/0'/0'`
-        this.d_scriptType = 'P2SH_SEGWIT'
+        this.d_scriptType = 'P2SHSEGWIT'
       } else if (val === 'Litecoin') {
         this.d_bip32Path = `m/49'/2'/0'`
-        this.d_scriptType = 'P2SH_SEGWIT'
+        this.d_scriptType = 'P2SHSEGWIT'
       } else if (val === 'Dogecoin') {
         this.d_bip32Path = `m/44'/3'/0'`
         this.d_scriptType = 'LEGACY'

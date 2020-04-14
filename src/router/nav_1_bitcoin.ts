@@ -32,12 +32,12 @@ const AddressMultisig = {
   component: () => import(`@/views/${__DIR__}/AddressMultisig`)
 }
 
-const SignTransaction = {
-  path: 'SignTransaction',
+const Transaction = {
+  path: 'Transaction',
   meta: {
-    title: 'Sign Transaction'
+    title: 'Transaction'
   },
-  component: () => import(`@/views/${__DIR__}/SignTransaction`)
+  component: () => import(`@/views/${__DIR__}/Transaction`)
 }
 
 export default {
@@ -48,5 +48,5 @@ export default {
     title: 'Bitcoin'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Account, PublicKey, Address, AddressMultisig, SignTransaction]
+  children: [Account, PublicKey, Address, AddressMultisig, Transaction]
 }

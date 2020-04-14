@@ -1,33 +1,22 @@
 <template>
   <v-container fluid>
     <v-row>
-      <!-- Command -->
-      <v-col cols="2">
-        <v-btn @click="signBTC()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
-        <br />
-        <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')" hide-details></v-select>
-        <br />
-        <v-text-field v-model="d_version" :label="$t('version')" hide-details />
-        <br />
-        <v-text-field v-model="d_lockTime" :label="$t('lock_time')" hide-details />
-        <br />
-        <v-textarea :label="$t('inputs_json')" v-model="d_inputs"></v-textarea>
-        <v-textarea :label="$t('outputs_json')" v-model="d_outputs"></v-textarea>
-        <v-textarea :label="$t('utxo_json')" v-model="d_utxo"></v-textarea>
-        <br />
-        <ul>
-          <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
-          <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki" target="_blank">bip-0045.mediawiki</a></li>
-          <li><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" target="_blank">slip-0044.md</a></li>
-        </ul>
+      <v-col cols="12" sm="4">
+        <v-card>
+          <v-card-text>
+            <v-btn @click="signBTC()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
+            <br />
+            <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')"></v-select>
+            <v-text-field v-model="d_version" :label="$t('version')" />
+            <v-text-field v-model="d_lockTime" :label="$t('lock_time')" />
+            <v-textarea :label="$t('inputs_json')" v-model="d_inputs"></v-textarea>
+            <v-textarea :label="$t('outputs_json')" v-model="d_outputs"></v-textarea>
+            <v-textarea :label="$t('utxo_json')" v-model="d_utxo"></v-textarea>
+          </v-card-text>
+        </v-card>
       </v-col>
-
-      <!-- Request -->
-      <v-col cols="5">
+      <v-col cols="12" sm="8">
         <v-textarea :label="$t('Request')" :value="d_request" filled readonly auto-grow></v-textarea>
-      </v-col>
-      <!-- Response  -->
-      <v-col cols="5">
         <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
@@ -36,7 +25,7 @@
 
 <script>
 export default {
-  name: 'SignTransaction',
+  name: 'Transaction',
   data: () => ({
     d_coinName: 'Bitcoin',
     d_version: 1,
@@ -53,33 +42,33 @@ export default {
   mounted() {
     const inputs = [
       {
-        address_n: [2147483692, 2147483648, 2147483648],
+        bip32_path: `m/45'/0/0/0`,
         prev_hash: 'b3e400a6ec426652f22e7cc9056388713b27040ecd6620820b4e88e422b9dbb4',
         prev_index: 0,
         sequence: 4294967295,
-        script_type: 'SPENDMULTISIG',
+        script_type: 'MULTISIG',
         amount: '305170',
         multisig: {
           pubkeys: [
             {
-              node: 'xpub6CQrHpo3WyZUick9cZX62LnizmfkYXAWki6gaNsg7qcWwxGfPdcevpJLdndWh1DKpxbhZuB7PQWzYaA2myuMD2Y5ADm4AFeDczxryEEt2dA',
-              address_n: []
+              xpub: 'xpub6DwRZP9AGY74m2LYeAgqjThHVg6YgQVTjR8snD9JXm9TSP1bM7jXur79iZfHqAz11MDDygUpfAGJRKEngX3TM6AtESfkhSUyjA8C7foZ2Sy',
+              path: ''
             },
             {
-              node: 'xpub6EM1j8mUpjLTH3yu3m95EnadifxH9cJho9HeyK9sySpiSdEkniaJbpvwkJLQJaVZ91p1CTX2PtSD1xubAnbqUDbLL6eiAaVof38GRnfttmr',
-              address_n: []
+              xpub: 'xpub6EM1j8mUpjLTH3yu3m95EnadifxH9cJho9HeyK9sySpiSdEkniaJbpvwkJLQJaVZ91p1CTX2PtSD1xubAnbqUDbLL6eiAaVof38GRnfttmr',
+              path: ''
             },
             {
-              node: 'xpub6Cv91ksLxY6mP88jy3xLGhe4AgxRsSmJDD3xJbxhkEJEZRXtn4gAcQf7CAURhvWZWqYqLMT5eqSDF5TwB6oX7HEwSEYDfNHx4FD55A1Rwwi',
-              address_n: []
+              xpub: 'xpub6Cv91ksLxY6mP88jy3xLGhe4AgxRsSmJDD3xJbxhkEJEZRXtn4gAcQf7CAURhvWZWqYqLMT5eqSDF5TwB6oX7HEwSEYDfNHx4FD55A1Rwwi',
+              path: ''
             },
             {
-              node: 'xpub6CB1p2e5RYzJbv4UnKacXQLQyFKRz2iaXp7N1TZzcBB5kXZqrZdwpZcGkaWPN1wpmtaxQztVt27ExmmaoT7imJrmNaF1NLQUAGnCmigrBxM',
-              address_n: []
+              xpub: 'xpub6CB1p2e5RYzJbv4UnKacXQLQyFKRz2iaXp7N1TZzcBB5kXZqrZdwpZcGkaWPN1wpmtaxQztVt27ExmmaoT7imJrmNaF1NLQUAGnCmigrBxM',
+              path: ''
             },
             {
-              node: 'xpub6Ei4K7R6Cuu4Nf1QNm2rf3C8LCHiYqrkVTAAaXWgehzK1fuKpRCwjmUv5w7KLaitC9nfXke34wna3jjZtup9HTimhiiTZoKRWhYHdfeAcUx',
-              address_n: []
+              xpub: 'xpub6Ei4K7R6Cuu4Nf1QNm2rf3C8LCHiYqrkVTAAaXWgehzK1fuKpRCwjmUv5w7KLaitC9nfXke34wna3jjZtup9HTimhiiTZoKRWhYHdfeAcUx',
+              path: ''
             }
           ],
           signatures: ['', '', '', ''],
@@ -91,12 +80,12 @@ export default {
       {
         address: '321m4ZKqkPfE27kXZEvfXxrroMiXeL1K9p',
         amount: '1000',
-        script_type: 'PAYTOADDRESS'
+        script_type: 'OUT_LEGACY'
       },
       {
         address: '1Dxzq1eqMmskCWYuUgkJDvTbBHr5sqG2ZY',
         amount: '1000',
-        script_type: 'PAYTOADDRESS'
+        script_type: 'OUT_LEGACY'
       }
     ]
     const utxo = [

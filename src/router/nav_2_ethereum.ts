@@ -8,28 +8,28 @@ const Account = {
   component: () => import(`@/views/${__DIR__}/Account`)
 }
 
-const GetPublicKey = {
-  path: 'GetPublicKey',
+const PublicKey = {
+  path: 'PublicKey',
   meta: {
-    title: 'Get Public Key'
+    title: 'PublicKey'
   },
-  component: () => import(`@/views/${__DIR__}/GetPublicKey`)
+  component: () => import(`@/views/${__DIR__}/PublicKey`)
 }
 
-const GetAddress = {
-  path: 'GetAddress',
+const Address = {
+  path: 'Address',
   meta: {
-    title: 'Get Address'
+    title: 'Address'
   },
-  component: () => import(`@/views/${__DIR__}/GetAddress`)
+  component: () => import(`@/views/${__DIR__}/Address`)
 }
 
-const SignTransaction = {
-  path: 'SignTransaction',
+const Transaction = {
+  path: 'Transaction',
   meta: {
-    title: 'Sign Transaction'
+    title: 'Transaction'
   },
-  component: () => import(`@/views/${__DIR__}/SignTransaction`)
+  component: () => import(`@/views/${__DIR__}/Transaction`)
 }
 
 export default {
@@ -40,5 +40,5 @@ export default {
     title: 'Ethereum'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Account, GetPublicKey, GetAddress, SignTransaction]
+  children: [Account, PublicKey, Address, Transaction]
 }

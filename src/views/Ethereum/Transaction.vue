@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: 'SignTransaction',
+  name: 'Transaction',
   data: () => ({
     d_coinName: 'Ethereum',
     d_bip44Path: `m/44'/60'/0'/0/0`,
@@ -47,10 +47,6 @@ export default {
   }),
   computed: {
     c_coins: vm => vm.$store.__s('app.asETH')
-  },
-  mounted() {
-    // let a = Buffer.from('0', 'binary').toString('hex')
-    // console.log(a)
   },
   methods: {
     async signETH() {

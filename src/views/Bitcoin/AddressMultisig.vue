@@ -19,8 +19,8 @@
         <v-textarea :label="$t('Response')" :value="d_response" filled readonly auto-grow></v-textarea>
       </v-col>
     </v-row>
-  </v-container> </template
->value
+  </v-container>
+</template>
 
 <script>
 export default {
