@@ -8,20 +8,28 @@ const Account = {
   component: () => import(`@/views/${__DIR__}/Account`)
 }
 
-const GetPublicKey = {
-  path: 'GetPublicKey',
+const PublicKey = {
+  path: 'PublicKey',
   meta: {
-    title: 'Get Public Key'
+    title: 'PublicKey'
   },
-  component: () => import(`@/views/${__DIR__}/GetPublicKey`)
+  component: () => import(`@/views/${__DIR__}/PublicKey`)
 }
 
-const GetAddress = {
-  path: 'GetAddress',
+const Address = {
+  path: 'Address',
   meta: {
-    title: 'Get Address'
+    title: 'Address'
   },
-  component: () => import(`@/views/${__DIR__}/GetAddress`)
+  component: () => import(`@/views/${__DIR__}/Address`)
+}
+
+const AddressMultisig = {
+  path: 'AddressMultisig',
+  meta: {
+    title: 'Address Multisig'
+  },
+  component: () => import(`@/views/${__DIR__}/AddressMultisig`)
 }
 
 const SignTransaction = {
@@ -40,5 +48,5 @@ export default {
     title: 'Bitcoin'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Account, GetPublicKey, GetAddress, SignTransaction]
+  children: [Account, PublicKey, Address, AddressMultisig, SignTransaction]
 }

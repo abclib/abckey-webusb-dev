@@ -56,7 +56,8 @@ export default {
         'Device disconnected': '设备已断开',
         'Action cancelled by user': '操作已取消。',
         'Device is already initialized. Use Wipe first.': '设备已初始化。',
-        'Unable to claim interface.': '无法声明 WebUSB 接口。'
+        'Unable to claim interface.': '无法声明 WebUSB 接口。',
+        "Can't encode address": '无法编码地址。'
       }
     }
   }

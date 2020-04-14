@@ -7,19 +7,9 @@
             <v-btn @click="getPublicKey()" color="primary" large block>{{ $t('Get Public Key') }}</v-btn>
             <br />
             <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')"></v-select>
-            <v-select
-              v-model="d_scriptType"
-              :items="['SPENDADDRESS', 'SPENDMULTISIG', 'EXTERNAL', 'SPENDWITNESS', 'SPENDP2SHWITNESS']"
-              :label="$t('script_type')"
-            ></v-select>
-            <v-text-field v-model="d_bip44Path" :label="$t('bip44_path')" />
+            <v-text-field v-model="d_bip32Path" :label="$t('bip32_path')" />
+            <v-select v-model="d_scriptType" :items="['LEGACY', 'BECH32', 'P2SH_SEGWIT']" :label="$t('script_type')"></v-select>
             <v-select v-model="d_showDisplay" :items="[true, false]" :label="$t('show_display')"></v-select>
-            <ul>
-              <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki" target="_blank">bip-0032.mediawiki</a></li>
-              <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki" target="_blank">bip-0044.mediawiki</a></li>
-              <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0045.mediawiki" target="_blank">bip-0045.mediawiki</a></li>
-              <li><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" target="_blank">slip-0044.md</a></li>
-            </ul>
           </v-card-text>
         </v-card>
       </v-col>
@@ -33,11 +23,11 @@
 
 <script>
 export default {
-  name: 'GetPublicKey',
+  name: 'PublicKey',
   data: () => ({
     d_coinName: 'Bitcoin',
-    d_bip44Path: `m/49'/0'/0'`,
-    d_scriptType: 'SPENDP2SHWITNESS',
+    d_bip32Path: `m/49'/0'/0'`,
+    d_scriptType: 'P2SH_SEGWIT',
     d_showDisplay: false,
     d_response: '',
     d_request: ''
@@ -47,17 +37,20 @@ export default {
   },
   watch: {
     d_scriptType(val) {
-      if (val === 'SPENDADDRESS') this.d_bip44Path = `m/44'/0/0`
-      if (val === 'SPENDMULTISIG') this.d_bip44Path = `m/45'/0`
-      if (val === 'SPENDP2SHWITNESS') this.d_bip44Path = `m/49'/0/0`
+      if (val === 'LEGACY') this.d_bip32Path = `m/44'/0'/0'`
+      if (val === 'BECH32') this.d_bip32Path = `m/49'/0'/0'`
+      if (val === 'P2SH_SEGWIT') this.d_bip32Path = `m/49'/0'/0'`
     },
     d_coinName(val) {
       if (val === 'Bitcoin') {
-        this.d_bip44Path = `m/49'/0'/0'`
-        this.d_scriptType = 'SPENDP2SHWITNESS'
+        this.d_bip32Path = `m/49'/0'/0'`
+        this.d_scriptType = 'P2SH_SEGWIT'
+      } else if (val === 'Litecoin') {
+        this.d_bip32Path = `m/49'/2'/0'`
+        this.d_scriptType = 'P2SH_SEGWIT'
       } else if (val === 'Dogecoin') {
-        this.d_bip44Path = `m/44'/0'/0'`
-        this.d_scriptType = 'SPENDADDRESS'
+        this.d_bip32Path = `m/44'/3'/0'`
+        this.d_scriptType = 'LEGACY'
       }
     }
   },
@@ -65,7 +58,7 @@ export default {
     async getPublicKey() {
       const proto = {
         coin_name: this.d_coinName,
-        bip44_path: this.d_bip44Path,
+        bip32_path: this.d_bip32Path,
         script_type: this.d_scriptType,
         show_display: this.d_showDisplay
       }
@@ -81,7 +74,7 @@ export default {
       zhCN: {
         'Get Public Key': '获取公钥',
         coin_name: '币名',
-        bip44_path: '路径',
+        bip32_path: '路径',
         script_type: '类型',
         show_display: '显示'
       }
