@@ -7,18 +7,13 @@
             <v-btn @click="signETH()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
             <br />
             <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')"></v-select>
-            <v-text-field v-model="d_bip44Path" :label="$t('bip44_path')" />
+            <v-text-field v-model="d_bip32Path" :label="$t('bip32_path')" />
             <v-text-field v-model="d_nonce" :label="$t('nonce')" type="number" />
             <v-text-field v-model="d_gasPrice" :label="$t('gas_price')" type="number" />
             <v-text-field v-model="d_gasLimit" :label="$t('gas_limit')" type="number" />
             <v-text-field v-model="d_to" :label="$t('to')" />
             <v-text-field v-model="d_value" :label="$t('value')" type="number" />
             <v-text-field v-model="d_chainId" :label="$t('chain_id')" type="number" />
-            <br />
-            <ul>
-              <li><a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md">EIP 155</a></li>
-              <li><a href="https://chainid.network">Chain ID</a></li>
-            </ul>
           </v-card-text>
         </v-card>
       </v-col>
@@ -35,7 +30,7 @@ export default {
   name: 'Transaction',
   data: () => ({
     d_coinName: 'Ethereum',
-    d_bip44Path: `m/44'/60'/0'/0/0`,
+    d_bip32Path: `m/44'/60'/0'/0/0`,
     d_nonce: '0',
     d_gasPrice: '1',
     d_gasLimit: '21000',
@@ -51,7 +46,7 @@ export default {
   methods: {
     async signETH() {
       const proto = {
-        bip44_path: this.d_bip44Path,
+        bip32_path: this.d_bip32Path,
         nonce: this.d_nonce,
         gas_price: this.d_gasPrice,
         gas_limit: this.d_gasLimit,
