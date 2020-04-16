@@ -32,6 +32,14 @@ const Transaction = {
   component: () => import(`@/views/${__DIR__}/Transaction`)
 }
 
+const ERC20Transaction = {
+  path: 'ERC20Transaction',
+  meta: {
+    title: 'ERC20 Transaction'
+  },
+  component: () => import(`@/views/${__DIR__}/ERC20Transaction`)
+}
+
 export default {
   path: `/${__DIR__}`,
   redirect: `/${__DIR__}/GetPublicKey`,
@@ -40,5 +48,5 @@ export default {
     title: 'Ethereum'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Account, PublicKey, Address, Transaction]
+  children: [Account, PublicKey, Address, Transaction, ERC20Transaction]
 }

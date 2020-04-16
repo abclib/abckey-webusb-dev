@@ -24,14 +24,6 @@ const Address = {
   component: () => import(`@/views/${__DIR__}/Address`)
 }
 
-const AddressMultisig = {
-  path: 'AddressMultisig',
-  meta: {
-    title: 'Address Multisig'
-  },
-  component: () => import(`@/views/${__DIR__}/AddressMultisig`)
-}
-
 const Transaction = {
   path: 'Transaction',
   meta: {
@@ -40,12 +32,20 @@ const Transaction = {
   component: () => import(`@/views/${__DIR__}/Transaction`)
 }
 
-const TransactionMultisig = {
+const MultisigAddress = {
+  path: 'MultisigAddress',
+  meta: {
+    title: 'Multisig Address'
+  },
+  component: () => import(`@/views/${__DIR__}/MultisigAddress`)
+}
+
+const MultisigTransaction = {
   path: 'TransactionMultisig',
   meta: {
-    title: 'Transaction Multisig'
+    title: 'Multisig Transaction'
   },
-  component: () => import(`@/views/${__DIR__}/TransactionMultisig`)
+  component: () => import(`@/views/${__DIR__}/MultisigTransaction`)
 }
 
 export default {
@@ -56,5 +56,5 @@ export default {
     title: 'Bitcoin'
   },
   component: () => import(`@/views/${__DIR__}/index`),
-  children: [Account, PublicKey, Address, AddressMultisig, Transaction, TransactionMultisig]
+  children: [Account, PublicKey, Address, Transaction, MultisigAddress, MultisigTransaction]
 }
