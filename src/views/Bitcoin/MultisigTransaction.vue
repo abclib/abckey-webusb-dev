@@ -4,7 +4,7 @@
       <v-col cols="12" sm="4">
         <v-card>
           <v-card-text>
-            <v-btn @click="signBTC()" color="primary" large block>{{ $t('Sign Transaction') }}</v-btn>
+            <v-btn @click="signBTC()" color="primary" large block>{{ $t('Multisig Transaction') }}</v-btn>
             <br />
             <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')"></v-select>
             <v-text-field v-model="d_version" :label="$t('version')" />
@@ -135,7 +135,6 @@ export default {
   i18n: {
     messages: {
       zhCN: {
-        'Sign Transaction': '签名交易',
         coin_name: '币名',
         version: '版本',
         lock_time: '锁定时间',

@@ -32,10 +32,10 @@ export default {
     d_coinName: 'Ethereum',
     d_bip32Path: `m/44'/60'/0'/0/0`,
     d_nonce: '0',
-    d_gasPrice: '1',
+    d_gasPrice: '1000000000',
     d_gasLimit: '21000',
     d_to: '0xAEc6B4896bCCa877653a9E0df13FE085c3fafef2',
-    d_value: '1',
+    d_value: '1000000000',
     d_chainId: '1',
     d_request: '',
     d_response: ''
@@ -46,6 +46,7 @@ export default {
   methods: {
     async signETH() {
       const proto = {
+        erc20: this.d_erc20,
         bip32_path: this.d_bip32Path,
         nonce: this.d_nonce,
         gas_price: this.d_gasPrice,

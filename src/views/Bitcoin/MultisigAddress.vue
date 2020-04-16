@@ -4,7 +4,7 @@
       <v-col cols="12" sm="4">
         <v-card>
           <v-card-text>
-            <v-btn @click="getAddress()" color="primary" large block>{{ $t('Get Address') }}</v-btn>
+            <v-btn @click="getAddress()" color="primary" large block>{{ $t('Multisig Address') }}</v-btn>
             <br />
             <v-select v-model="d_coinName" :items="c_coins" :label="$t('coin_name')"></v-select>
             <v-text-field v-model="d_bip32Path" :label="$t('bip32_path')" />
@@ -77,7 +77,6 @@ export default {
   i18n: {
     messages: {
       zhCN: {
-        'Get Address': '获取地址',
         coin_name: '币名',
         bip32_path: '路径',
         script_type: '类型',

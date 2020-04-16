@@ -21,8 +21,6 @@
 </template>
 
 <script>
-import BN from 'bignumber.js'
-
 export default {
   name: 'GetAddress',
   data: () => ({
