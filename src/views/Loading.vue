@@ -14,11 +14,6 @@
 export default {
   name: 'Loading',
   data: () => ({}),
-  async created() {
-    await new Promise(resolve => setTimeout(resolve, 1111)) // Give the loading animation some delay
-    const init = await this.initialize()
-    if (init) await this.publickey()
-  },
   methods: {
     async initialize() {
       const init = await this.$usb.cmd('Initialize')
@@ -39,6 +34,11 @@ export default {
       if (msg.type === 'PublicKey') this.$router.push({ path: `/Bitcoin/Account` })
       else if (msg.type === 'Failure') this.$router.push({ path: `/Connect` })
     }
+  },
+  async created() {
+    await new Promise(resolve => setTimeout(resolve, 1111)) // Give the loading animation some delay
+    const init = await this.initialize()
+    if (init) await this.publickey()
   },
   i18n: {
     messages: {

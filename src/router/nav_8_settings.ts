@@ -16,14 +16,6 @@ const ChangePin = {
   component: () => import(`@/views/${__DIR__}/ChangePin`)
 }
 
-const Ping = {
-  path: 'Ping',
-  meta: {
-    title: 'Ping'
-  },
-  component: () => import(`@/views/${__DIR__}/Ping`)
-}
-
 const ResetDevice = {
   path: 'ResetDevice',
   meta: {
@@ -38,6 +30,14 @@ const RecoveryDevice = {
     title: 'Recovery Device'
   },
   component: () => import(`@/views/${__DIR__}/RecoveryDevice`)
+}
+
+const Ping = {
+  path: 'Ping',
+  meta: {
+    title: 'Ping'
+  },
+  component: () => import(`@/views/${__DIR__}/Ping`)
 }
 
 export default {
