@@ -8,8 +8,8 @@ install:
   - npm install
 script: 
   - npm run build
-after_success:
-  - cd ./docs
+after_script:
+  - cd docs
   - echo "dev.abckey.com" > CNAME
   - cp index.html 404.html
   - git init  
@@ -17,7 +17,7 @@ after_success:
   - git config user.email "${U_EMAIL}"
   - git add .
   - git commit -m "Automatically update from travis-ci"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
+  - git push -f -q "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
 deploy:
   provider: pages
   skip_cleanup: true
