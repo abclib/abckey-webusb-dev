@@ -9,12 +9,12 @@ install:
 script: 
   - npm run build
 after_success:
-  - cd dist
+  - cd ./dist
   - echo "dev.abckey.com" > CNAME
-  - cp index.html 404.html  
+  - cp index.html 404.html
   - git init  
   - git config user.name "${U_NAME}"
-  - git config user.email "${U_EMAIL}"  
+  - git config user.email "${U_EMAIL}"
   - git add .
   - git commit -m "Automatically update from travis-ci"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
