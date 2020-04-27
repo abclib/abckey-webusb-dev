@@ -9,7 +9,7 @@ install:
 script: 
   - npm run build
 after_success:
-  - cd docs
+  - cd ./docs
   - echo "dev.abckey.com" > CNAME
   - cp index.html 404.html
   - git init  
