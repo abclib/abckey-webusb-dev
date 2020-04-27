@@ -7,7 +7,7 @@ script:
   - npm run build
 after_success:
   - cd dist
-  - echo "abckey.com" > CNAME
+  - echo "dev.abckey.com" > CNAME
   - cp index.html 404.html  
   - git init  
   - git config user.name "${U_NAME}"
@@ -15,13 +15,6 @@ after_success:
   - git add .
   - git commit -m "Automatically update from travis-ci"
   - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master:${P_BRANCH}
-deploy:
-  provider: pages
-  skip_cleanup: true
-  deployment_file: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  verbose: true
 branches:
   only:
     - master
