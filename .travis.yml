@@ -1,6 +1,10 @@
 language: node_js
 node_js: stable
-cache: npm
+cache:
+  yarn: true
+  npm: true
+  directories:
+    - node_modules
 install:
   - npm install
 script: 
@@ -14,7 +18,15 @@ after_success:
   - git config user.email "${U_EMAIL}"  
   - git add .
   - git commit -m "Automatically update from travis-ci"
-  - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master:${P_BRANCH}
+  - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" ${P_BRANCH}:${P_BRANCH}
+deploy:
+  provider: pages
+  skip_cleanup: true
+  deployment_file: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  target-branch: ${P_BRANCH}
+  verbose: true
 branches:
   only:
     - master
