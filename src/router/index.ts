@@ -36,14 +36,14 @@ const routes: Array<RouteConfig> = [
     },
     component: () => import(/* webpackChunkName: "Loading" */ '@/views/Loading.vue')
   },
-  // {
-  //   path: '/Bootloader',
-  //   meta: {
-  //     icon: 'mdi-progress-wrench',
-  //     title: 'Bootloader'
-  //   },
-  //   component: () => import(/* webpackChunkName: "Bootloader" */ '@/views/Bootloader.vue')
-  // },
+  {
+    path: '/Bootloader',
+    meta: {
+      icon: 'mdi-tools',
+      title: 'Bootloader'
+    },
+    component: () => import(/* webpackChunkName: "Bootloader" */ '@/views/Bootloader.vue')
+  },
   {
     path: '/Pin',
     meta: {
@@ -55,7 +55,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/Passphrase',
     meta: {
-      icon: 'mdi-textbox-password',
+      icon: 'mdi-form-textbox-password',
       title: 'Passphrase'
     },
     component: () => import(/* webpackChunkName: "Passphrase" */ '@/views/Passphrase.vue')

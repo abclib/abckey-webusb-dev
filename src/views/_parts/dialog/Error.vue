@@ -22,7 +22,7 @@ export default {
   },
   watch: {
     c_msg(msg) {
-      if (msg.type === 'Failure') {
+      if (msg.type === 'Failure' && msg.data.message) {
         this.d_show = true
         this.d_msg = msg.data.message
       }
@@ -31,9 +31,8 @@ export default {
       if (!err) return
       this.d_show = true
       this.d_msg = err.message
-      if (this.$route.path === '/Loading' || this.$route.path === '/Pin' || this.$route.path === '/Passphrase') {
+      if (this.$route.path === '/Loading' || this.$route.path === '/Pin' || this.$route.path === '/Passphrase' || this.$route.path === '/Bootloader')
         this.$router.push('/Connect')
-      }
     }
   },
   methods: {
