@@ -10,19 +10,19 @@ script:
   - npm run build
 after_script:
   - cd docs
-  - echo "dev.abckey.com" > CNAME
+  - echo "${CNAME}" > CNAME
   - cp index.html 404.html
   - git init  
-  - git config user.name "${U_NAME}"
-  - git config user.email "${U_EMAIL}"
+  - git config user.name "${USER_NAME}"
+  - git config user.email "${USER_EMAIL}"
   - git add .
-  - git commit -m "Automatically update from travis-ci"
-  - git push -f -q "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
+  - git commit -m ":-)"
+  - git push -f -q "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
 deploy:
+  github_token: $GH_TOKEN
   provider: pages
   skip_cleanup: true
   deployment_file: true
-  github_token: $GH_TOKEN
   keep_history: true
   verbose: true
 branches:
