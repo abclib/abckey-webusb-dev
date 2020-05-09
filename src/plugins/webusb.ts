@@ -23,7 +23,8 @@ webusb.onMsg(e => {
   const msg = JSON.parse(JSON.stringify(e))
   Store.__s('usb.msg', msg)
   if (msg.type === 'Features') {
-    Store.__s('usb.label', msg.data.label)
+    Store.__s('usb.label', msg.data.label || msg.data.vendor)
+    Store.__s('usb.firmwarePresent', msg.data.firmware_present)
   } else if (msg.type === 'PinMatrixRequest') Router.push({ path: `/Pin` })
   else if (msg.type === 'PassphraseRequest') Router.push({ path: `/Passphrase` })
 })
