@@ -16,7 +16,7 @@ jobs:
           npm run build
           cd docs
           cp index.html 404.html
-          echo "pro.abckey.com" > CNAME
+          echo "dev.abckey.com" > CNAME
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@master
