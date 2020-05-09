@@ -10,18 +10,27 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@master
 
-      - name: Install and Build 🔧
+      - name: Cache ☕
+        id: cache
+        uses: actions/cache@master
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-npm-caches-${{ hashFiles('package-lock.json') }}
+
+      - name: Install 🔧
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Build 🔧
         run: |
-          npm install
           npm run build
           cd docs
           cp index.html 404.html
-          echo "dev.abckey.com" > CNAME
+          echo "${{ secrets.CNAME }}" > CNAME
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@master
         with:
-          SSH: true
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: .
