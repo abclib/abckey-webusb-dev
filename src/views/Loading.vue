@@ -16,12 +16,11 @@ export default {
   data: () => ({}),
   methods: {
     async initialize() {
-      const init = await this.$usb.cmd('Initialize')
-      if (init.data.bootloader_mode) {
-        this.$router.push({ path: `/Bootloader` })
-        return false
-      }
-      return true
+      const msg = await this.$usb.cmd('Initialize')
+      if (msg.data.bootloader_mode && !msg.data.firmware_present) return this.$router.push({ path: `/Welcome` })
+      else if (msg.data.bootloader_mode && msg.data.bootloader_mode) return this.$router.push({ path: `/Bootloader` })
+      else if (!msg.data.initialized) return this.$router.push({ path: `/Initialize` })
+      return msg
     },
     async publickey() {
       const proto = {
@@ -37,8 +36,8 @@ export default {
   },
   async created() {
     await new Promise(resolve => setTimeout(resolve, 1111)) // Give the loading animation some delay
-    const init = await this.initialize()
-    if (init) await this.publickey()
+    const msg = await this.initialize()
+    if (msg.data?.initialized) await this.publickey()
   },
   i18n: {
     messages: {

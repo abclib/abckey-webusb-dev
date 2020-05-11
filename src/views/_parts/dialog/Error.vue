@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="d_show" width="initial" overlay-opacity=".7" persistent>
     <v-chip @click="close()" x-large label>
-      <span class="px-3 headline">
+      <span class="px-3 headline d-flex align-center">
         <v-icon left>mdi-message-alert</v-icon>
         <span>{{ $t(d_msg) }}</span>
         <v-icon color="red darken-3" right>mdi-close-circle-outline</v-icon>
@@ -31,7 +31,14 @@ export default {
       if (!err) return
       this.d_show = true
       this.d_msg = err.message
-      if (this.$route.path === '/Loading' || this.$route.path === '/Pin' || this.$route.path === '/Passphrase' || this.$route.path === '/Bootloader')
+      if (
+        this.$route.path === '/Loading' ||
+        this.$route.path === '/Pin' ||
+        this.$route.path === '/Passphrase' ||
+        this.$route.path === '/Bootloader' ||
+        this.$route.path === '/Welcome' ||
+        this.$route.path === '/Initialize'
+      )
         this.$router.push('/Connect')
     }
   },
@@ -58,7 +65,8 @@ export default {
         'Device is already initialized. Use Wipe first.': '设备已初始化。',
         'Unable to claim interface.': '无法声明 WebUSB 接口。',
         "Can't encode address": '无法编码地址。',
-        'Pubkey not found in multisig script': '多签公钥未匹配。'
+        'Pubkey not found in multisig script': '多签公钥未匹配。',
+        'A transfer error has occurred.': '数据传输错误'
       }
     }
   }

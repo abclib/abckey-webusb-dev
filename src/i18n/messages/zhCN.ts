@@ -3,6 +3,8 @@ export default {
     Loading: '加载',
     PIN: 'PIN 码',
     Bootloader: '引导',
+    Welcome: '欢迎',
+    Initialize: '初始化',
     Passphrase: '密码',
     Account: '账户',
     PublicKey: '公钥',

@@ -6,13 +6,12 @@
         <h1 class="display-1 mt-7">{{ $t('Bootloader') }}</h1>
         <div class="mt-7">
           <v-btn class="mx-2" color="primary" @click="upgrade()"><v-icon left>mdi-transfer-up</v-icon>{{ $t('Upgrade') }}</v-btn>
-          <v-btn class="mx-2" color="error" @click="d_reset = 1"><v-icon left>mdi-eraser</v-icon>{{ $t('Reset') }}</v-btn>
+          <v-btn class="mx-2" @click="d_reset = 1"><v-icon left>mdi-eraser</v-icon>{{ $t('Reset') }}</v-btn>
         </div>
-        <v-overlay :value="d_overlay" z-index="99" opacity=".7"></v-overlay>
       </div>
     </v-layout>
 
-    <v-dialog :value="d_upgrade === 1" max-width="333" overlay-opacity=".9" persistent>
+    <v-dialog :value="d_upgrade === 2" max-width="333" overlay-opacity=".9" persistent>
       <v-card>
         <v-card-title class="headline">{{ $t('Updating...') }}</v-card-title>
         <v-card-text>
@@ -44,9 +43,9 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog :value="d_reset === 3 || d_upgrade === 2" width="initial" overlay-opacity=".9" persistent>
+    <v-dialog :value="d_reset === 3 || d_upgrade === 1" width="initial" overlay-opacity=".9" persistent>
       <v-chip x-large label>
-        <span class="px-3 headline">
+        <span class="px-3 headline d-flex align-center">
           <v-icon left>mdi-gesture-tap-button</v-icon>
           <span>{{ $t('Please operate on the device!') }}</span>
         </span>
@@ -54,7 +53,7 @@
     </v-dialog>
     <v-dialog :value="d_reset === 4 || d_upgrade === 3" width="initial" overlay-opacity=".9" persistent>
       <v-chip x-large label>
-        <span class="px-3 headline">
+        <span class="px-3 headline d-flex align-center">
           <v-icon left>mdi-power-plug-off</v-icon>
           <span>{{ $t('Please replug the device!') }}</span>
         </span>
@@ -67,22 +66,17 @@
 import Axios from 'axios'
 
 export default {
-  name: 'Connect',
+  name: 'Bootloader',
   data: () => ({
-    d_overlay: false,
     d_upgrade: 0,
     d_reset: 0
   }),
-  computed: {
-    c_fw: vm => vm.$store.__s('usb.firmwarePresent')
-  },
   methods: {
     async upgrade() {
       this.d_upgrade = 1
-      if (this.c_fw) this.d_upgrade = 2
       const msg = await this.$usb.cmd('FirmwareErase', {})
       if (msg.type === 'Failure') return (this.d_upgrade = 3)
-      this.d_upgrade = 1
+      this.d_upgrade = 2
       const { data } = await Axios.get(`/bin/core.bin`, { responseType: 'arraybuffer' })
       if (data) await this.$usb.cmd('FirmwareUpload', { payload: Buffer.from(data) })
       this.d_upgrade = 3
@@ -93,14 +87,11 @@ export default {
       this.d_reset = 4
     }
   },
-  created() {
-    if (!this.c_fw) this.upgrade()
-  },
   i18n: {
     messages: {
       zhCN: {
         Bootloader: '引导程序',
-        Upgrade: '升级',
+        Upgrade: '更新',
         Reset: '重置',
         Next: '下一步',
         Wipe: '擦除',

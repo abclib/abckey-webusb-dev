@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="d_show" width="initial" overlay-opacity=".9" persistent>
     <v-chip x-large label>
-      <span class="px-3 headline">
+      <span class="px-3 headline d-flex align-center">
         <v-icon left>mdi-gesture-tap-button</v-icon>
         <span>{{ $t('Please operate on the device!') }}</span>
       </span>
@@ -19,6 +19,7 @@ export default {
   },
   watch: {
     c_msg(msg) {
+      if (this.$route.path === '/Initialize') return
       if (msg.type === 'ButtonRequest') this.d_show = true
       else this.d_show = false
     }

@@ -16,7 +16,7 @@
         <template v-slot:activator="{ on }">
           <v-btn outlined rounded color="blue" v-on="on">
             <v-icon>mdi-usb-port</v-icon>
-            <span class="text-capitalize">{{ c_label }}</span>
+            <span style="text-transform: initial;">{{ c_label }}</span>
           </v-btn>
         </template>
 

@@ -37,12 +37,28 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "Loading" */ '@/views/Loading.vue')
   },
   {
+    path: '/Welcome',
+    meta: {
+      icon: 'mdi-shield-alert',
+      title: 'Welcome'
+    },
+    component: () => import(/* webpackChunkName: "Welcome" */ '@/views/Welcome.vue')
+  },
+  {
     path: '/Bootloader',
     meta: {
       icon: 'mdi-tools',
       title: 'Bootloader'
     },
     component: () => import(/* webpackChunkName: "Bootloader" */ '@/views/Bootloader.vue')
+  },
+  {
+    path: '/Initialize',
+    meta: {
+      icon: 'mdi-wallet-plus',
+      title: 'Initialize'
+    },
+    component: () => import(/* webpackChunkName: "Initialize" */ '@/views/Initialize.vue')
   },
   {
     path: '/Pin',
