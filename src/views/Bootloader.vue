@@ -12,7 +12,7 @@
       </div>
     </v-layout>
 
-    <v-dialog :value="d_upgrade === 1" max-width="333" persistent>
+    <v-dialog :value="d_upgrade === 1" max-width="333" overlay-opacity=".9" persistent>
       <v-card>
         <v-card-title class="headline">{{ $t('Updating...') }}</v-card-title>
         <v-card-text>
@@ -21,7 +21,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog :value="d_reset === 1" max-width="333" persistent>
+    <v-dialog :value="d_reset === 1" max-width="333" overlay-opacity=".9" persistent>
       <v-card>
         <v-card-title class="headline">{{ $t('Factory reset?') }}</v-card-title>
         <v-card-text>{{ $t('You can reset the Device to factory defaults if you need to do so.') }}</v-card-text>
@@ -32,7 +32,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog :value="d_reset === 2" max-width="333" persistent>
+    <v-dialog :value="d_reset === 2" max-width="333" overlay-opacity=".9" persistent>
       <v-card>
         <v-card-title class="headline">{{ $t('Warning!') }}</v-card-title>
         <v-card-text>{{ $t('Factory reset will erase all sensitive data, including the seed from the device, as well as the firmware.') }}</v-card-text>
@@ -80,10 +80,11 @@ export default {
     async upgrade() {
       this.d_upgrade = 1
       if (this.c_fw) this.d_upgrade = 2
-      await this.$usb.cmd('FirmwareErase', {})
+      const msg = await this.$usb.cmd('FirmwareErase', {})
+      if (msg.type === 'Failure') return (this.d_upgrade = 3)
       this.d_upgrade = 1
       const { data } = await Axios.get(`/bin/core.bin`, { responseType: 'arraybuffer' })
-      await this.$usb.cmd('FirmwareUpload', { payload: Buffer.from(data) })
+      if (data) await this.$usb.cmd('FirmwareUpload', { payload: Buffer.from(data) })
       this.d_upgrade = 3
     },
     async wipeDevice() {
@@ -104,6 +105,7 @@ export default {
         Next: '下一步',
         Wipe: '擦除',
         Cancel: '取消',
+        'Operation aborted.': '操作已中止',
         'Updating...': '正在更新……',
         'Factory reset?': '恢复出厂设置？',
         'Warning!': '警告！',
