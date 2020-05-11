@@ -3,5 +3,5 @@ export default {
   asBTC: ['Bitcoin', 'Litecoin', 'Dogecoin'],
   asETH: ['Ethereum'],
   coinAbbr: ['BTC', 'LTC', 'DOGE'],
-  cash: ['USD ', 'CNY']
+  cash: ['USD', 'CNY']
 }
