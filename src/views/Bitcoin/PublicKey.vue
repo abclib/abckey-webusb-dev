@@ -45,6 +45,9 @@ export default {
       if (val === 'Bitcoin') {
         this.d_bip32Path = `m/49'/0'/0'`
         this.d_scriptType = 'P2SHSEGWIT'
+      } else if (val === 'Testnet') {
+        this.d_bip32Path = `m/44'/1'/0'/0/0`
+        this.d_scriptType = 'LEGACY'
       } else if (val === 'Litecoin') {
         this.d_bip32Path = `m/49'/2'/0'`
         this.d_scriptType = 'P2SHSEGWIT'
