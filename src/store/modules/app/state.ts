@@ -1,7 +1,7 @@
 export default {
   language: '',
-  asBTC: ['Bitcoin', 'Litecoin', 'Dogecoin'],
+  asBTC: ['Bitcoin', 'Regtest', 'Testnet', 'Bcash', 'Litecoin', 'Dogecoin', 'Komodo'],
   asETH: ['Ethereum'],
-  coinAbbr: ['BTC', 'LTC', 'DOGE'],
+  coin: ['BTC', 'REGTEST', 'TESTNET', 'BCH', 'LTC', 'DOGE', 'KMD'],
   cash: ['USD', 'CNY']
 }
