@@ -377,7 +377,7 @@ export default {
       this.d_unconfirmedBalance = this.sat2btc(data.unconfirmedBalance)
       this.d_unconfirmedTxs = data.unconfirmedTxs
       this.d_transactionCount = data.txs
-      this.d_addressCount = data.usedTokens
+      this.d_addressCount = data.usedTokens || 0
       this.d_loading.upBalance = false
       this._fixTxs(data.transactions, data.tokens)
     },

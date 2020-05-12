@@ -17,7 +17,7 @@ export default {
     d_xpub: ''
   }),
   computed: {
-    c_coin: vm => vm.$store.__s('app.coin'),
+    c_coin: vm => vm.$store.__s('app.ethUnit'),
     c_cash: vm => vm.$store.__s('app.cash')
   },
   i18n: {
