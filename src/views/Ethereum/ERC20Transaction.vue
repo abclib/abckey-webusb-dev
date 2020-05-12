@@ -43,7 +43,7 @@ export default {
     d_response: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.asETH')
+    c_coins: vm => vm.$store.__s('app.ethName')
   },
   methods: {
     async signETH() {

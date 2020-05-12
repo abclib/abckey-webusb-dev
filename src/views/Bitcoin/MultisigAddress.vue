@@ -35,7 +35,7 @@ export default {
     d_request: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.asBTC')
+    c_coins: vm => vm.$store.__s('app.btcName')
   },
   methods: {
     async getAddress() {

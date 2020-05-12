@@ -31,14 +31,24 @@ export default {
     d_request: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.asETH')
+    c_coins: vm => vm.$store.__s('app.ethName'),
+    c_slip44: vm => vm.$store.__s('app.slip44')
   },
   watch: {
     d_coinName(val) {
-      if (val === 'Ethereum') this.d_bip32Path = `m/44'/60'/0'/0`
+      this.d_bip32Path = this._bip32path(val, this.d_scriptType)
     }
   },
   methods: {
+    _bip32path(name) {
+      const path = this.d_bip32Path.split('/')
+      const purpose = 44
+      let slip44 = 0
+      slip44 = this.c_slip44[name]
+      path[1] = `${purpose}'`
+      path[2] = `${slip44}'`
+      return path.join('/')
+    },
     async getPublicKey() {
       const proto = {
         coin_name: this.d_coinName,

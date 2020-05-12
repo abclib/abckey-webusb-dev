@@ -27,37 +27,35 @@ export default {
   data: () => ({
     d_coinName: 'Bitcoin',
     d_bip32Path: `m/49'/0'/0'`,
-    d_scriptType: 'P2SHSEGWIT',
+    d_scriptType: 'LEGACY',
     d_showDisplay: false,
     d_response: '',
     d_request: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.asBTC')
+    c_coins: vm => vm.$store.__s('app.btcName'),
+    c_slip44: vm => vm.$store.__s('app.slip44')
   },
   watch: {
     d_scriptType(val) {
-      if (val === 'LEGACY') this.d_bip32Path = `m/44'/0'/0'`
-      if (val === 'BECH32') this.d_bip32Path = `m/49'/0'/0'`
-      if (val === 'P2SHSEGWIT') this.d_bip32Path = `m/49'/0'/0'`
+      this.d_bip32Path = this._bip32path(this.d_coinName, val)
     },
     d_coinName(val) {
-      if (val === 'Bitcoin') {
-        this.d_bip32Path = `m/49'/0'/0'`
-        this.d_scriptType = 'P2SHSEGWIT'
-      } else if (val === 'Testnet') {
-        this.d_bip32Path = `m/44'/1'/0'/0/0`
-        this.d_scriptType = 'LEGACY'
-      } else if (val === 'Litecoin') {
-        this.d_bip32Path = `m/49'/2'/0'`
-        this.d_scriptType = 'P2SHSEGWIT'
-      } else if (val === 'Dogecoin') {
-        this.d_bip32Path = `m/44'/3'/0'`
-        this.d_scriptType = 'LEGACY'
-      }
+      this.d_bip32Path = this._bip32path(val, this.d_scriptType)
     }
   },
   methods: {
+    _bip32path(name, type) {
+      const path = this.d_bip32Path.split('/')
+      let purpose = 0
+      let slip44 = 0
+      if (type === 'LEGACY') purpose = 44
+      else if (type === 'BECH32' || type === 'P2SHSEGWIT') purpose = 49
+      slip44 = this.c_slip44[name]
+      path[1] = `${purpose}'`
+      path[2] = `${slip44}'`
+      return path.join('/')
+    },
     async getPublicKey() {
       const proto = {
         coin_name: this.d_coinName,

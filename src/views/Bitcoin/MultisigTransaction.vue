@@ -37,7 +37,7 @@ export default {
     d_response: ''
   }),
   computed: {
-    c_coins: vm => vm.$store.__s('app.asBTC')
+    c_coins: vm => vm.$store.__s('app.btcName')
   },
   mounted() {
     const inputs = [
