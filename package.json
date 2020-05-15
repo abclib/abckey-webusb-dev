@@ -8,7 +8,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@abckey/webusb": "^0.3.2",
+    "@abckey/webusb": "^0.3.3",
     "@babel/polyfill": "^7.4.4",
     "@trust/keyto": "^1.0.1",
     "axios": "^0.19.2",
