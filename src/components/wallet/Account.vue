@@ -302,7 +302,7 @@
     <p class="mt-3 mb-7 grey--text text-center">
       <span class="caption">
         {{ $t('Only the latest 1000 data is displayed.') }}
-        <a :href="`https://blockchair.com/${coin}/xpub/${xpub}`" target="_blank">{{ $t('See more') }}</a>
+        <a :href="c_blockchair" target="_blank">{{ $t('See more') }}</a>
       </span>
     </p>
   </v-container>
@@ -315,7 +315,7 @@ import BN from 'bignumber.js'
 export default {
   props: {
     coin: {
-      default: 'btc',
+      default: 'BTC',
       type: String
     },
     cash: {
@@ -342,6 +342,15 @@ export default {
       upRate: false
     }
   }),
+  computed: {
+    c_blockchair() {
+      let url = 'https://blockchair.com'
+      if (this.$i18n.locale === 'zhCN') url += '/zh'
+      if (this.coin.toLowerCase() === 'btc') url += '/bitcoin'
+      url += `/xpub/${this.xpub}`
+      return url
+    }
+  },
   watch: {
     coin() {
       this.upAll()
